@@ -36,8 +36,8 @@ public final class Input {
 			try {
 				card = Integer.parseInt(input);
 				check = false;
-				if (card < 0 || card > 13) {
-					System.err.println("予測のカードは0以上、13以下を入力すること！");
+				if (card < 1 || card > 13) {
+					System.err.println("予測のカードは1以上、13以下を入力すること！");
 					input = sc.next();
 					check = true;
 

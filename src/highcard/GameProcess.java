@@ -1,7 +1,7 @@
 package highcard;
 
 import highcard.card.Card;
-import highcard.card.CardHandle;
+import highcard.card.CardHandler;
 import highcard.player.Player;
 
 public class GameProcess {
@@ -35,12 +35,12 @@ public class GameProcess {
 
 			}
 
-			CardHandle card_1 = new CardHandle();
+			CardHandler card_1 = new CardHandler();
 			System.out.println("一枚目 : " + card_1.getCardFull());
 
 			System.out.println("二枚目 は 一枚目1 より： \n 0. 弱い \n 1. 強い \n 2. ピタリ賞を狙う");
 			int sentaku = Input.inputSentaku();
-			CardHandle card_2 = new CardHandle();
+			CardHandler card_2 = new CardHandler();
 			if (sentaku != 2) {
 				System.out.println("二枚目 : " + card_2.getCardFull());
 			}
@@ -60,7 +60,7 @@ public class GameProcess {
 
 	}
 
-	public void kekka(int sentaku, CardHandle card_1, CardHandle card_2, int kakekin) {
+	public void kekka(int sentaku, CardHandler card_1, CardHandler card_2, int kakekin) {
 		if (sentaku == 0) {
 			if (card_1.isBiggerThan(card_2)) {
 				player.kachi(kakekin);
@@ -86,7 +86,7 @@ public class GameProcess {
 		}
 	}
 
-	public void pitari(CardHandle card_2, int kakekin) {
+	public void pitari(CardHandler card_2, int kakekin) {
 		Card sentakuCard = subPitari();
 		System.out.println("あなたの選択したカードは " + sentakuCard.getCardFull());
 		System.out.println("結果。。。。  二枚目　は " + card_2.getCardFull());
@@ -117,16 +117,16 @@ public class GameProcess {
 		while (loopCheck) {
 			switch (sentk) {
 			case 1:
-				pitariCard = new CardHandle().setCard(yosoku, "♥");
+				pitariCard = new CardHandler().setCard(yosoku, "♥");
 				break;
 			case 2:
-				pitariCard = new CardHandle().setCard(yosoku, "♣");
+				pitariCard = new CardHandler().setCard(yosoku, "♣");
 				break;
 			case 3:
-				pitariCard = new CardHandle().setCard(yosoku, "♦");
+				pitariCard = new CardHandler().setCard(yosoku, "♦");
 				break;
 			case 4:
-				pitariCard = new CardHandle().setCard(yosoku, "♠");
+				pitariCard = new CardHandler().setCard(yosoku, "♠");
 				break;
 			default:
 				System.out.println("正しく選択してください");
@@ -142,8 +142,8 @@ public class GameProcess {
 		return pitariCard;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(subPitari().getCardFull());
-	}
+//	public static void main(String[] args) {
+//		System.out.println(subPitari().getCardFull());
+//	}
 
 }

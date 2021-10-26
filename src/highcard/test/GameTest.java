@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import highcard.GameProcess;
-import highcard.card.CardHandle;
+import highcard.card.CardHandler;
 import highcard.player.Player;
 import highcard.player.PlayerManege;
 
@@ -18,7 +18,7 @@ public class GameTest {
 			GameProcess gameProcess = new GameProcess(player);
 			//random turns
 			for (int j = 0; j < rand.nextInt(20); j++) {
-				gameProcess.kekka(1, new CardHandle(), new CardHandle(), rand.nextInt(1000));
+				gameProcess.kekka(1, new CardHandler(), new CardHandler(), rand.nextInt(1000));
 			}
 			list.add(player);
 		}
