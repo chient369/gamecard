@@ -1,10 +1,10 @@
-package game.highcard;
+package highcard;
 
 import java.util.Scanner;
 
-import player.Player;
-import player.PlayerManege;
-import player.PlayerService;
+import highcard.player.Player;
+import highcard.player.PlayerManege;
+import highcard.player.PlayerService;
 
 public class main {
 	private static PlayerService playerService = new PlayerService(new PlayerManege());

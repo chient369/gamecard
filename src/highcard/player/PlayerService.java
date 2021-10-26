@@ -1,6 +1,6 @@
-package player;
+package highcard.player;
 
-import game.highcard.Input;
+import highcard.Input;
 
 public class PlayerService {
 	private final PlayerManege playerManege;

@@ -1,4 +1,4 @@
-package player;
+package highcard.player;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,13 +33,13 @@ public class PlayerManege {
 		Set<Player> bestList = new HashSet<Player>();
 		if (!players.isEmpty()) {
 			Player bestPlayer = players.get(0);
-			for (Player player : players) {
+			for (Player player : players) {	
 				if (bestPlayer.getShojikin() <= player.getShojikin()) {
 					bestPlayer = player;
 				}
 
 			}
-			for (Player player2 : players) {
+			for(Player player2 : players) {
 				if (bestPlayer.getShojikin() <= player2.getShojikin()) {
 					bestPlayer = player2;
 				}
@@ -50,7 +50,7 @@ public class PlayerManege {
 			for (Player player : bestList) {
 				showInfo(player);
 			}
-
+			
 		} else {
 			System.out.println("データがありません");
 
@@ -110,12 +110,12 @@ public class PlayerManege {
 		Set<Player> bestList = new HashSet<Player>();
 		if (!players.isEmpty()) {
 			Player bestPlayer = players.get(0);
-			for (Player player : players) {
+			for (Player player : players) {	
 				if (bestPlayer.getKaisu() <= player.getKaisu()) {
 					bestPlayer = player;
 				}
 			}
-			for (Player player2 : players) {
+			for(Player player2 : players) {
 				if (bestPlayer.getKaisu() <= player2.getKaisu()) {
 					bestPlayer = player2;
 				}
@@ -146,18 +146,11 @@ public class PlayerManege {
 	}
 
 	private void showInfo(Player player) {
-		String leftAlignFormat = "%-3s%15s%12d%15d  %n";
-
-		System.out.format("---------------------------------------------------+%n");
-		System.out.format(" ID          名前        最後の所持金     ゲーム回数   |%n");
-		System.out.format("---------------------------------------------------+%n");
-		System.out.format(leftAlignFormat, player.getPlayerId(),
-				player.getPlayerName(), player.getShojikin(), player.getKaisu());
-//		System.out.println("ID            : " + player.getPlayerId());
-//		System.out.println("名前          : " + player.getPlayerName());
-//		System.out.println("最後の所持金　  :　" + player.getShojikin());
-//		System.out.println("総回数         : " + player.getKaisu());
-//		System.out.println("===========================");
+		System.out.println("ID            : " + player.getPlayerId());
+		System.out.println("名前          : " + player.getPlayerName());
+		System.out.println("最後の所持金　  :　" + player.getShojikin());
+		System.out.println("総回数         : " + player.getKaisu());
+		System.out.println("===========================");
 	}
 
 }

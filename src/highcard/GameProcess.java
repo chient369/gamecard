@@ -1,8 +1,8 @@
-package game.highcard;
+package highcard;
 
-import card.Card;
-import card.CardHandler;
-import player.Player;
+import highcard.card.Card;
+import highcard.card.CardHandler;
+import highcard.player.Player;
 
 public class GameProcess {
 	private Player player;

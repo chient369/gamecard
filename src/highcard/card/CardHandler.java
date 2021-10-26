@@ -1,8 +1,11 @@
-package card;
+package highcard.card;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
+
+import org.w3c.dom.ls.LSOutput;
 
 public class CardHandler {
 	private static Random rand = new Random();
@@ -25,15 +28,15 @@ public class CardHandler {
 		cardRepos.add(card);
 		return card;
 	}
-/* show card of repository, it'll use to show history turned of card*/
-//	public  void showCardRepo() {
-//		Iterator<Card> it = cardRepos.iterator();
-//		while (it.hasNext()) {
-//			Card card = (Card) it.next();
-//			System.out.println(card.getCardFull());
-//		}
-//		System.out.println("repo size :" + cardRepos.size());
-//	}
+
+	public  void showCardRepo() {
+		Iterator<Card> it = cardRepos.iterator();
+		while (it.hasNext()) {
+			Card card = (Card) it.next();
+			System.out.println(card.getCardFull());
+		}
+		System.out.println("repo size :" + cardRepos.size());
+	}
 
 	public Card setCard(int card_num, String card_symbol) {
 		return new Card(card_num, card_symbol);
