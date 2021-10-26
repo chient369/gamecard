@@ -1,20 +1,20 @@
-package highcard.test;
+package game.test.highcard;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import highcard.GameProcess;
-import highcard.card.CardHandler;
-import highcard.player.Player;
-import highcard.player.PlayerManege;
+import card.CardHandler;
+import game.highcard.GameProcess;
+import player.Player;
+import player.PlayerManege;
 
 public class GameTest {
 	public static void main(String[] args) {		
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random rand = new Random();
 		//init 50 players
-		for (int i = 0; i < 50; i++) {
-			Player player = new Player("test num" + rand.nextInt(100));
+		for (int i = 0; i < 10; i++) {
+			Player player = new Player("testnum" + rand.nextInt(100));
 			GameProcess gameProcess = new GameProcess(player);
 			//random turns
 			for (int j = 0; j < rand.nextInt(20); j++) {

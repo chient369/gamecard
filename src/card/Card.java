@@ -1,4 +1,4 @@
-package highcard.card;
+package card;
 
 public class Card {
 	private int card_num;

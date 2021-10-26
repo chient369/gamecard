@@ -1,4 +1,4 @@
-package highcard.player;
+package player;
 
 import java.util.Objects;
 
