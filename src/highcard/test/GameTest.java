@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import highcard.GameProcess;
+import highcard.card.CardHandle;
 import highcard.player.Player;
 import highcard.player.PlayerManege;
 
@@ -11,11 +12,13 @@ public class GameTest {
 	public static void main(String[] args) {		
 		ArrayList<Player> list = new ArrayList<Player>();
 		Random rand = new Random();
+		//init 50 players
 		for (int i = 0; i < 50; i++) {
 			Player player = new Player("test num" + rand.nextInt(100));
 			GameProcess gameProcess = new GameProcess(player);
+			//random turns
 			for (int j = 0; j < rand.nextInt(20); j++) {
-				gameProcess.kekka(rand.nextInt(1) + 1, rand.nextInt(13), rand.nextInt(13), rand.nextInt(1000));
+				gameProcess.kekka(1, new CardHandle(), new CardHandle(), rand.nextInt(1000));
 			}
 			list.add(player);
 		}

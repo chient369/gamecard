@@ -1,14 +1,14 @@
 package highcard.card;
 
 public  class Card {
-	private String card_symbols;
 	private int card_num;
+	private String card_symbols;
 
 	public Card() {
 		super();
 	}
 
-	public Card(String card_symbols, int card_num) {
+	public Card(int card_num,String card_symbols) {
 		super();
 		this.card_symbols = card_symbols;
 		this.card_num = card_num;
@@ -22,7 +22,7 @@ public  class Card {
 		this.card_symbols = card_symbols;
 	}
 
-	public void setCadr_num(int card_num) {
+	public void setCard_num(int card_num) {
 		this.card_num = card_num;
 	}
 

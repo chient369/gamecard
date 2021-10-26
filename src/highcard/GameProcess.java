@@ -1,5 +1,6 @@
 package highcard;
 
+import highcard.card.Card;
 import highcard.card.CardHandle;
 import highcard.player.Player;
 
@@ -35,13 +36,13 @@ public class GameProcess {
 			}
 
 			CardHandle card_1 = new CardHandle();
-			System.out.println("カード1 : "+ card_1.getCardFull());
+			System.out.println("一枚目 : " + card_1.getCardFull());
 
-			System.out.println("カード2 は カード1 より： \n 0. 弱い \n 1. 強い \n 2. ピタリ賞を狙う");
+			System.out.println("二枚目 は 一枚目1 より： \n 0. 弱い \n 1. 強い \n 2. ピタリ賞を狙う");
 			int sentaku = Input.inputSentaku();
 			CardHandle card_2 = new CardHandle();
 			if (sentaku != 2) {
-				System.out.println("カード　2 : "+ card_2.getCardFull());
+				System.out.println("二枚目 : " + card_2.getCardFull());
 			}
 			shobu.kekka(sentaku, card_1, card_2, kakekin);
 			Player player = shobu.getPlayer();
@@ -86,10 +87,17 @@ public class GameProcess {
 	}
 
 	public void pitari(CardHandle card_2, int kakekin) {
-		System.out.print("次のカードはどの数値と思いますか : ");
-		int yosoku = Input.inputCard();
-		System.out.println("結果。。。。 カード2　は： "+ card_2.getCardFull());
-		if (card_2.getCardNum() == yosoku) {
+		Card sentakuCard = subPitari();
+		System.out.println("あなたの選択したカードは " + sentakuCard.getCardFull());
+		System.out.println("結果。。。。  二枚目　は " + card_2.getCardFull());
+		if (sentakuCard.getCardFull().equals(card_2.getCardFull())) {
+			System.out.println("おめでとうございます！🎆🎆🎆");
+			System.out.println("BIGピタリ賞  :  \n" + 20 * kakekin);
+			player.pitari(kakekin);
+			player.showPlayer();
+			
+		}
+		if (card_2.getCardNum() == sentakuCard.getCard_num()) {
 			System.out.println("おめでとうございます！🎆🎆🎆");
 			System.out.printf("ピタリ賞 : %d \n", 12 * kakekin);
 			player.pitari(kakekin);
@@ -97,6 +105,45 @@ public class GameProcess {
 		} else {
 			System.out.println("惜しかったね！\n");
 		}
+	}
+
+	private static Card subPitari() {
+		Card pitariCard = null;
+		System.out.print("次のカードはどの数値と思いますか : ");
+		int yosoku = Input.inputCard();
+		boolean loopCheck = true;
+		System.out.println("絵柄は:\n 1. ♥\n 2. ♣\n 3. ♦\n 4. ♠");
+		int sentk = Input.inputChoose();
+		while (loopCheck) {
+			switch (sentk) {
+			case 1:
+				pitariCard = new CardHandle().setCard(yosoku, "♥");
+				break;
+			case 2:
+				pitariCard = new CardHandle().setCard(yosoku, "♣");
+				break;
+			case 3:
+				pitariCard = new CardHandle().setCard(yosoku, "♦");
+				break;
+			case 4:
+				pitariCard = new CardHandle().setCard(yosoku, "♠");
+				break;
+			default:
+				System.out.println("正しく選択してください");
+				sentk = Input.inputChoose();
+				break;
+
+			}
+			if (pitariCard != null) {
+				loopCheck = false;
+			}
+
+		}
+		return pitariCard;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(subPitari().getCardFull());
 	}
 
 }
