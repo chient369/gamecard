@@ -1,10 +1,14 @@
 <<<<<<< HEAD:src/player/Player.java
 <<<<<<< HEAD:src/player/Player.java
+<<<<<<< HEAD:src/player/Player.java
 <<<<<<< HEAD:src/game/common/player/GamePlayer.java
 package game.common.player;
 =======
 package player;
 >>>>>>> parent of d0400a3 (add gamepoker):src/player/Player.java
+=======
+package player;
+>>>>>>> parent of d0400a3 (add gamepoker):src/highcard/player/Player.java
 =======
 package player;
 >>>>>>> parent of d0400a3 (add gamepoker):src/highcard/player/Player.java

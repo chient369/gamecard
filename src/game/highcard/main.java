@@ -2,31 +2,12 @@ package game.highcard;
 
 import java.util.Scanner;
 
-<<<<<<< HEAD:src/game/highcard/main.java
-<<<<<<< HEAD:src/game/highcard/main.java
-<<<<<<< HEAD:src/highcard/main.java
-import game.common.player.GamePlayer;
-import game.common.player.GamePlayerManege;
-import game.common.player.HighCardPlayerManege;
-import highcard.player.HighCardPlayerService;
-=======
 import player.Player;
 import player.PlayerManege;
 import player.PlayerService;
->>>>>>> parent of d0400a3 (add gamepoker):src/game/highcard/main.java
-=======
-import player.Player;
-import player.PlayerManege;
-import player.PlayerService;
->>>>>>> parent of d0400a3 (add gamepoker):src/highcard/main.java
-=======
-import player.Player;
-import player.PlayerManege;
-import player.PlayerService;
->>>>>>> parent of d0400a3 (add gamepoker):src/highcard/main.java
 
 public class main {
-	private static HighCardPlayerService playerService = new HighCardPlayerService(new HighCardPlayerManege());
+	private static PlayerService playerService = new PlayerService(new PlayerManege());
 	private static Scanner sc = new Scanner(System.in);
 	private static boolean check_loop = true;
 
@@ -40,7 +21,7 @@ public class main {
 			case 1:
 				System.out.println("あなたの名前を入力してください");
 				String playerName = sc.next();
-				GamePlayer player = playerService.createPlayer(playerName);
+				Player player = playerService.createPlayer(playerName);
 				GameProcess shobu = new GameProcess(player);
 				shobu.gameProccess(shobu);
 				break;

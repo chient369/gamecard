@@ -1,8 +1,13 @@
 package player;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< HEAD:src/player/PlayerService.java
 =======
+<<<<<<< HEAD:src/player/HighCardPlayerService.java
+>>>>>>> parent of d0400a3 (add gamepoker)
+=======
+<<<<<<< HEAD:src/player/HighCardPlayerService.java
 <<<<<<< HEAD:src/player/HighCardPlayerService.java
 >>>>>>> parent of d0400a3 (add gamepoker)
 <<<<<<< HEAD:src/player/HighCardPlayerService.java
@@ -16,8 +21,15 @@ import game.highcard.Input;
 =======
 import game.highcard.Input;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> parent of d0400a3 (add gamepoker):src/highcard/player/PlayerService.java
 =======
+>>>>>>> parent of d0400a3 (add gamepoker):src/player/PlayerService.java
+>>>>>>> parent of d0400a3 (add gamepoker)
+=======
+>>>>>>> parent of d0400a3 (add gamepoker):src/player/PlayerService.java
+=======
+import game.highcard.Input;
 >>>>>>> parent of d0400a3 (add gamepoker):src/player/PlayerService.java
 >>>>>>> parent of d0400a3 (add gamepoker)
 
