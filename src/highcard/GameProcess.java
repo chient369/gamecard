@@ -1,5 +1,6 @@
-package game.highcard;
+package highcard;
 
+<<<<<<< HEAD:src/game/highcard/GameProcess.java
 <<<<<<< HEAD:src/game/highcard/GameProcess.java
 <<<<<<< HEAD:src/game/highcard/GameProcess.java
 <<<<<<< HEAD:src/game/highcard/GameProcess.java
@@ -27,6 +28,11 @@ import card.Card;
 import card.CardHandler;
 import player.Player;
 >>>>>>> parent of d0400a3 (add gamepoker):src/highcard/GameProcess.java
+=======
+import highcard.card.Card;
+import highcard.card.CardHandler;
+import highcard.player.Player;
+>>>>>>> parent of 942a95f (rename and add gamepoker pj):src/highcard/GameProcess.java
 
 public class GameProcess {
 	private GamePlayer player;

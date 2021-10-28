@@ -1,6 +1,6 @@
-package game.test.highcard;
+package highcard.test;
 
-import card.CardHandler;
+import highcard.card.CardHandler;
 
 public class CardHandlerTest {
 	public static void main(String[] args) {
@@ -9,7 +9,7 @@ public class CardHandlerTest {
 			cardHandler = new CardHandler();
 
 		}
-		//cardHandler.showCardRepo();
+		cardHandler.showCardRepo();
 
 	}
 

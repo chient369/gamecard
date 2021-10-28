@@ -1,11 +1,15 @@
 <<<<<<< HEAD:src/game/highcard/Input.java
 <<<<<<< HEAD:src/game/highcard/Input.java
+<<<<<<< HEAD:src/game/highcard/Input.java
 <<<<<<< HEAD
 =======
 >>>>>>> parent of d0400a3 (add gamepoker):src/highcard/Input.java
 =======
 >>>>>>> parent of d0400a3 (add gamepoker):src/highcard/Input.java
 package game.highcard;
+=======
+package highcard;
+>>>>>>> parent of 942a95f (rename and add gamepoker pj):src/highcard/Input.java
 
 import java.util.Scanner;
 

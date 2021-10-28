@@ -1,5 +1,6 @@
-package player;
+package highcard.player;
 
+<<<<<<< HEAD:src/player/PlayerService.java
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD:src/player/PlayerService.java
@@ -35,6 +36,9 @@ import game.highcard.Input;
 
 public class HighCardPlayerService extends GamePlayerService {
 	private final HighCardPlayerManege playerManege;
+=======
+import highcard.Input;
+>>>>>>> parent of 942a95f (rename and add gamepoker pj):src/highcard/player/PlayerService.java
 
 	public HighCardPlayerService(HighCardPlayerManege playerManege) {
 
