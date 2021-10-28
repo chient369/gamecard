@@ -1,4 +1,4 @@
-package highcard.card;
+package common;
 
 import java.util.HashSet;
 import java.util.Iterator;

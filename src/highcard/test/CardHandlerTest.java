@@ -1,6 +1,6 @@
 package highcard.test;
 
-import highcard.card.CardHandler;
+import common.CardHandler;
 
 public class CardHandlerTest {
 	public static void main(String[] args) {

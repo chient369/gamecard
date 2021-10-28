@@ -1,4 +1,4 @@
-package highcard.card;
+package common;
 
 public class Card {
 	private int card_num;
@@ -55,7 +55,7 @@ public class Card {
 		}
 
 	}
-	
+
 //	public static void main(String[] args) {
 //		Card card = new Card(1,"♧");
 //		System.out.println(card.getCardFull());

@@ -1,38 +1,9 @@
 package highcard;
 
-<<<<<<< HEAD:src/game/highcard/GameProcess.java
-<<<<<<< HEAD:src/game/highcard/GameProcess.java
-<<<<<<< HEAD:src/game/highcard/GameProcess.java
-<<<<<<< HEAD:src/game/highcard/GameProcess.java
-<<<<<<< HEAD:src/highcard/GameProcess.java
-import game.common.player.GamePlayer;
-import highcard.card.Card;
-import highcard.card.CardHandler;
-=======
-import card.Card;
-import card.CardHandler;
-import player.Player;
->>>>>>> parent of d0400a3 (add gamepoker):src/game/highcard/GameProcess.java
-=======
-import card.Card;
-import card.CardHandler;
-import player.Player;
->>>>>>> parent of d0400a3 (add gamepoker):src/highcard/GameProcess.java
-=======
-import card.Card;
-import card.CardHandler;
-import player.Player;
->>>>>>> parent of d0400a3 (add gamepoker):src/highcard/GameProcess.java
-=======
-import card.Card;
-import card.CardHandler;
-import player.Player;
->>>>>>> parent of d0400a3 (add gamepoker):src/highcard/GameProcess.java
-=======
-import highcard.card.Card;
-import highcard.card.CardHandler;
-import highcard.player.Player;
->>>>>>> parent of 942a95f (rename and add gamepoker pj):src/highcard/GameProcess.java
+import common.Card;
+import common.CardHandler;
+import common.GameInput;
+import common.player.GamePlayer;
 
 public class GameProcess {
 	private GamePlayer player;
@@ -52,7 +23,7 @@ public class GameProcess {
 		player.showPlayer();
 		while (keizoku) {
 			System.out.print("掛け金を入力してください : ");
-			int kakekin = Input.inputKakekin();
+			int kakekin = GameInput.inputKakekin();
 
 			if (kakekin == 9999) {
 				System.out.println("ゲーム終了");
@@ -61,7 +32,7 @@ public class GameProcess {
 			}
 			while (kakekin > player.getShojikin()) {
 				System.out.println("所持金以下の掛け金を入力してください　");
-				kakekin = Input.inputKakekin();
+				kakekin = GameInput.inputKakekin();
 
 			}
 
@@ -69,7 +40,7 @@ public class GameProcess {
 			System.out.println("一枚目 : " + card_1.getCardFull());
 
 			System.out.println("二枚目 は 一枚目1 より： \n 0. 弱い \n 1. 強い \n 2. ピタリ賞を狙う");
-			int sentaku = Input.inputSentaku();
+			int sentaku = GameInput.inputSentaku();
 			CardHandler card_2 = new CardHandler();
 			if (sentaku != 2) {
 				System.out.println("二枚目 : " + card_2.getCardFull());
@@ -140,10 +111,10 @@ public class GameProcess {
 	private static Card subPitari() {
 		Card pitariCard = null;
 		System.out.print("次のカードはどの数値と思いますか : ");
-		int yosoku = Input.inputCard();
+		int yosoku = GameInput.inputCard();
 		boolean loopCheck = true;
 		System.out.println("絵柄は:\n 1. ♥\n 2. ♣\n 3. ♦\n 4. ♠");
-		int sentk = Input.inputChoose();
+		int sentk = GameInput.inputChoose();
 		while (loopCheck) {
 			switch (sentk) {
 			case 1:
@@ -160,7 +131,7 @@ public class GameProcess {
 				break;
 			default:
 				System.out.println("正しく選択してください");
-				sentk = Input.inputChoose();
+				sentk = GameInput.inputChoose();
 				break;
 
 			}

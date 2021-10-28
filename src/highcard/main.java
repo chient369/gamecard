@@ -2,12 +2,13 @@ package highcard;
 
 import java.util.Scanner;
 
-import highcard.player.Player;
-import highcard.player.PlayerManege;
-import highcard.player.PlayerService;
+import common.GameInput;
+import common.player.GamePlayer;
+import common.player.GamePlayerManege;
+import common.player.GamePlayerService;
 
 public class main {
-	private static PlayerService playerService = new PlayerService(new PlayerManege());
+	private static GamePlayerService playerService = new GamePlayerService(new GamePlayerManege());
 	private static Scanner sc = new Scanner(System.in);
 	private static boolean check_loop = true;
 
@@ -16,12 +17,12 @@ public class main {
 		while (check_loop) {
 
 			System.out.println("こんにちは \n 1. スタート \n 2.　ユーザー管理 \n 0. ゲーム終了");
-			int inp = Input.inputSentaku();
+			int inp = GameInput.inputSentaku();
 			switch (inp) {
 			case 1:
 				System.out.println("あなたの名前を入力してください");
 				String playerName = sc.next();
-				Player player = playerService.createPlayer(playerName);
+				GamePlayer player = playerService.createPlayer(playerName);
 				GameProcess shobu = new GameProcess(player);
 				shobu.gameProccess(shobu);
 				break;
@@ -34,7 +35,7 @@ public class main {
 				break;
 			default:
 				System.err.println("正しく入力してください");
-				inp = Input.inputSentaku();
+				inp = GameInput.inputSentaku();
 			}
 
 		}

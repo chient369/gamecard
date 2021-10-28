@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/game/common/GameInput.java
-package game.common;
-=======
-package game.highcard;
->>>>>>> parent of d0400a3 (add gamepoker):src/game/highcard/Input.java
+package common;
 
 import java.util.Scanner;
 
@@ -21,7 +17,6 @@ public class GameInput {
 					System.err.println("非負の掛け金を入力してください");
 					input = sc.next();
 
-
 				}
 
 			} catch (Exception e) {
@@ -32,6 +27,7 @@ public class GameInput {
 		}
 		return kakekin;
 	}
+
 	public static int inputCard() {
 		int card = 0;
 		String input = sc.next();
@@ -79,6 +75,7 @@ public class GameInput {
 		}
 		return sentaku;
 	}
+
 	public static int inputChoose() {
 		int choose = 0;
 		String input = sc.next();
@@ -98,6 +95,5 @@ public class GameInput {
 		}
 		return choose;
 	}
-
 
 }
