@@ -3,6 +3,7 @@ package game.highcard;
 import java.util.Scanner;
 
 <<<<<<< HEAD:src/game/highcard/main.java
+<<<<<<< HEAD:src/game/highcard/main.java
 <<<<<<< HEAD:src/highcard/main.java
 import game.common.player.GamePlayer;
 import game.common.player.GamePlayerManege;
@@ -13,6 +14,11 @@ import player.Player;
 import player.PlayerManege;
 import player.PlayerService;
 >>>>>>> parent of d0400a3 (add gamepoker):src/game/highcard/main.java
+=======
+import player.Player;
+import player.PlayerManege;
+import player.PlayerService;
+>>>>>>> parent of d0400a3 (add gamepoker):src/highcard/main.java
 =======
 import player.Player;
 import player.PlayerManege;
