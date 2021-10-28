@@ -1,4 +1,4 @@
-package highcard;
+package game.highcard;
 
 import java.util.Scanner;
 
