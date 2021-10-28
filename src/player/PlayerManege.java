@@ -1,8 +1,4 @@
-<<<<<<< HEAD:src/game/common/player/HighCardPlayerManege.java
-package game.common.player;
-=======
 package player;
->>>>>>> parent of d0400a3 (add gamepoker):src/player/PlayerManege.java
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,49 +6,40 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
-import highcard.player.HighCardPlayer;
+public class PlayerManege {
+	private ArrayList<Player> players = new ArrayList<Player>();
 
-public class HighCardPlayerManege extends GamePlayerManege {
-	private ArrayList<HighCardPlayer> players = new ArrayList<HighCardPlayer>();
-
-	public HighCardPlayerManege() {
+	public PlayerManege() {
 		super();
 	}
 
-	public HighCardPlayerManege(ArrayList<HighCardPlayer> players) {
+	public PlayerManege(ArrayList<Player> list) {
 		super();
+		this.players = list;
+	}
+
+	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
 	}
 
-	@Override
-	public GamePlayer createPlayer(String playerName) {
-		HighCardPlayer player = new HighCardPlayer(playerName);
+	public Player createPlayer(String playerName) {
+		Player player = new Player(playerName);
 		players.add(player);
 
 		return player;
 	}
 
-	@Override
-	protected void showBestPlayer() {
-		Set<GamePlayer> bestList = new HashSet<GamePlayer>();
+	public void showBestPlayer() {
+		Set<Player> bestList = new HashSet<Player>();
 		if (!players.isEmpty()) {
-<<<<<<< HEAD:src/game/common/player/HighCardPlayerManege.java
-			GamePlayer bestPlayer = players.get(0);
-			for (GamePlayer player : players) {
-=======
 			Player bestPlayer = players.get(0);
 			for (Player player : players) {
->>>>>>> parent of d0400a3 (add gamepoker):src/player/PlayerManege.java
 				if (bestPlayer.getShojikin() <= player.getShojikin()) {
 					bestPlayer = player;
 				}
 
 			}
-<<<<<<< HEAD:src/game/common/player/HighCardPlayerManege.java
-			for (GamePlayer player2 : players) {
-=======
 			for (Player player2 : players) {
->>>>>>> parent of d0400a3 (add gamepoker):src/player/PlayerManege.java
 				if (bestPlayer.getShojikin() <= player2.getShojikin()) {
 					bestPlayer = player2;
 				}
@@ -60,13 +47,9 @@ public class HighCardPlayerManege extends GamePlayerManege {
 			}
 			System.out.println("総人数      : " + players.size());
 			System.out.println("所持金が一番のユーザー：");
-<<<<<<< HEAD:src/game/common/player/HighCardPlayerManege.java
-			showInfo(players);
-=======
 			for (Player player : bestList) {
 				showInfo(player);
 			}
->>>>>>> parent of d0400a3 (add gamepoker):src/player/PlayerManege.java
 
 		} else {
 			System.out.println("データがありません");
@@ -75,12 +58,11 @@ public class HighCardPlayerManege extends GamePlayerManege {
 
 	}
 
-	@Override
 	public void showPlayersRank() {
-		Collections.sort(players, new Comparator<GamePlayer>() {
+		Collections.sort(players, new Comparator<Player>() {
 
 			@Override
-			public int compare(GamePlayer o1, GamePlayer o2) {
+			public int compare(Player o1, Player o2) {
 				if (o1.getShojikin() > o2.getShojikin()) {
 					return 1;
 				} else if (o1.getShojikin() < o2.getShojikin()) {
@@ -94,12 +76,11 @@ public class HighCardPlayerManege extends GamePlayerManege {
 
 	}
 
-	@Override
 	public void sortPlayerById() {
-		Collections.sort(players, new Comparator<GamePlayer>() {
+		Collections.sort(players, new Comparator<Player>() {
 
 			@Override
-			public int compare(GamePlayer o1, GamePlayer o2) {
+			public int compare(Player o1, Player o2) {
 				return o1.getPlayerId().compareTo(o2.getPlayerId());
 			}
 		});
@@ -107,12 +88,11 @@ public class HighCardPlayerManege extends GamePlayerManege {
 
 	}
 
-	@Override
 	public void sortPlayerByKaisu() {
-		Collections.sort(players, new Comparator<GamePlayer>() {
+		Collections.sort(players, new Comparator<Player>() {
 
 			@Override
-			public int compare(GamePlayer o1, GamePlayer o2) {
+			public int compare(Player o1, Player o2) {
 				if (o1.getKaisu() > o2.getKaisu()) {
 					return 1;
 				} else if (o1.getKaisu() < o2.getKaisu()) {
@@ -126,26 +106,16 @@ public class HighCardPlayerManege extends GamePlayerManege {
 
 	}
 
-	@Override
 	public void showPlayerBestKaisu() {
-		Set<GamePlayer> bestList = new HashSet<GamePlayer>();
+		Set<Player> bestList = new HashSet<Player>();
 		if (!players.isEmpty()) {
-<<<<<<< HEAD:src/game/common/player/HighCardPlayerManege.java
-			GamePlayer bestPlayer = players.get(0);
-			for (GamePlayer player : players) {
-=======
 			Player bestPlayer = players.get(0);
 			for (Player player : players) {
->>>>>>> parent of d0400a3 (add gamepoker):src/player/PlayerManege.java
 				if (bestPlayer.getKaisu() <= player.getKaisu()) {
 					bestPlayer = player;
 				}
 			}
-<<<<<<< HEAD:src/game/common/player/HighCardPlayerManege.java
-			for (GamePlayer player2 : players) {
-=======
 			for (Player player2 : players) {
->>>>>>> parent of d0400a3 (add gamepoker):src/player/PlayerManege.java
 				if (bestPlayer.getKaisu() <= player2.getKaisu()) {
 					bestPlayer = player2;
 				}
@@ -153,35 +123,27 @@ public class HighCardPlayerManege extends GamePlayerManege {
 			}
 			System.out.println("総人数      : " + players.size());
 			System.out.println("総回数が一番のユーザー：");
-			showInfo(players);
-
+			for (Player player : bestList) {
+				showInfo(player);
+			}
 		} else {
 			System.out.println("データがありません");
 
 		}
-
 	}
 
-	private  void showInfo(ArrayList<HighCardPlayer> players) {
+	private void showPlayers(ArrayList<Player> players) {
 		if (!players.isEmpty()) {
-			String format = "%7s%13s%13d%15d %n";
-			System.out.format("+--------------------------------------------------+%n");
-			System.out.format("  ID    |    名前      |    最後の所持金    |      回数%n");
-			for (GamePlayer player : players) {
-				System.out.format(format, player.getPlayerId(), player.getPlayerName(), player.getShojikin(),
-						player.getKaisu());
-				System.out.format("+--------------------------------------------------+%n");
+			for (Player player : players) {
+				showInfo(player);
 
 			}
 		} else {
 			System.out.println("データがありません");
 			System.out.println("やってみましょう　");
-
 		}
+
 	}
-<<<<<<< HEAD:src/game/common/player/HighCardPlayerManege.java
-		
-=======
 
 	private void showInfo(Player player) {
 		String leftAlignFormat = "%-3s%15s%12d%15d  %n";
@@ -196,6 +158,6 @@ public class HighCardPlayerManege extends GamePlayerManege {
 //		System.out.println("最後の所持金　  :　" + player.getShojikin());
 //		System.out.println("総回数         : " + player.getKaisu());
 //		System.out.println("===========================");
->>>>>>> parent of d0400a3 (add gamepoker):src/player/PlayerManege.java
 	}
 
+}

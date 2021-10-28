@@ -1,4 +1,8 @@
+<<<<<<< HEAD:src/game/common/GameInput.java
 package game.common;
+=======
+package game.highcard;
+>>>>>>> parent of d0400a3 (add gamepoker):src/game/highcard/Input.java
 
 import java.util.Scanner;
 

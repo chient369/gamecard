@@ -3,6 +3,7 @@ package game.test.highcard;
 import java.util.ArrayList;
 import java.util.Random;
 
+<<<<<<< HEAD:src/game/test/highcard/GameTest.java
 <<<<<<< HEAD:src/highcard/test/GameTest.java
 import game.common.player.HighCardPlayerManege;
 import highcard.GameProcess;
@@ -10,17 +11,23 @@ import highcard.card.CardHandler;
 import highcard.player.HighCardPlayer;
 
 =======
+=======
+>>>>>>> parent of d0400a3 (add gamepoker):src/highcard/test/GameTest.java
 import card.CardHandler;
 import game.highcard.GameProcess;
 import player.Player;
 import player.PlayerManege;
+<<<<<<< HEAD:src/game/test/highcard/GameTest.java
 >>>>>>> parent of d0400a3 (add gamepoker):src/game/test/highcard/GameTest.java
+=======
+>>>>>>> parent of d0400a3 (add gamepoker):src/highcard/test/GameTest.java
 
 public class GameTest {
 	public static void main(String[] args) {		
 		ArrayList<HighCardPlayer> list = new ArrayList<HighCardPlayer>();
 		Random rand = new Random();
 		//init 50 players
+<<<<<<< HEAD:src/game/test/highcard/GameTest.java
 <<<<<<< HEAD:src/highcard/test/GameTest.java
 		for (int i = 0; i < 50; i++) {
 			HighCardPlayer player = new HighCardPlayer("TEST NO." +rand.nextInt(100)+1);
@@ -28,6 +35,10 @@ public class GameTest {
 		for (int i = 0; i < 10; i++) {
 			Player player = new Player("testnum" + rand.nextInt(100));
 >>>>>>> parent of d0400a3 (add gamepoker):src/game/test/highcard/GameTest.java
+=======
+		for (int i = 0; i < 10; i++) {
+			Player player = new Player("testnum" + rand.nextInt(100));
+>>>>>>> parent of d0400a3 (add gamepoker):src/highcard/test/GameTest.java
 			GameProcess gameProcess = new GameProcess(player);
 			//random turns
 			for (int j = 0; j < rand.nextInt(20); j++) {

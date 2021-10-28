@@ -1,5 +1,6 @@
 package player;
 
+<<<<<<< HEAD:src/player/PlayerService.java
 <<<<<<< HEAD:src/player/HighCardPlayerService.java
 import game.common.player.GamePlayer;
 import game.common.player.GamePlayerService;
@@ -8,6 +9,9 @@ import highcard.Input;
 =======
 import game.highcard.Input;
 >>>>>>> parent of d0400a3 (add gamepoker):src/player/PlayerService.java
+=======
+import game.highcard.Input;
+>>>>>>> parent of d0400a3 (add gamepoker):src/highcard/player/PlayerService.java
 
 public class HighCardPlayerService extends GamePlayerService {
 	private final HighCardPlayerManege playerManege;
