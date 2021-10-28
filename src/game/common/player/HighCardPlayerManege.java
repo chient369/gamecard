@@ -1,4 +1,4 @@
-package highcard.player;
+package game.common.player;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,40 +6,40 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
-public class PlayerManege {
-	private ArrayList<Player> players = new ArrayList<Player>();
+import highcard.player.HighCardPlayer;
 
-	public PlayerManege() {
+public class HighCardPlayerManege extends GamePlayerManege {
+	private ArrayList<HighCardPlayer> players = new ArrayList<HighCardPlayer>();
+
+	public HighCardPlayerManege() {
 		super();
 	}
 
-	public PlayerManege(ArrayList<Player> list) {
+	public HighCardPlayerManege(ArrayList<HighCardPlayer> players) {
 		super();
-		this.players = list;
-	}
-
-	public void setPlayers(ArrayList<Player> players) {
 		this.players = players;
 	}
 
-	public Player createPlayer(String playerName) {
-		Player player = new Player(playerName);
+	@Override
+	public GamePlayer createPlayer(String playerName) {
+		HighCardPlayer player = new HighCardPlayer(playerName);
 		players.add(player);
 
 		return player;
 	}
 
-	public void showBestPlayer() {
-		Set<Player> bestList = new HashSet<Player>();
+	@Override
+	protected void showBestPlayer() {
+		Set<GamePlayer> bestList = new HashSet<GamePlayer>();
 		if (!players.isEmpty()) {
-			Player bestPlayer = players.get(0);
-			for (Player player : players) {	
+			GamePlayer bestPlayer = players.get(0);
+			for (GamePlayer player : players) {
 				if (bestPlayer.getShojikin() <= player.getShojikin()) {
 					bestPlayer = player;
 				}
 
 			}
-			for(Player player2 : players) {
+			for (GamePlayer player2 : players) {
 				if (bestPlayer.getShojikin() <= player2.getShojikin()) {
 					bestPlayer = player2;
 				}
@@ -47,10 +47,8 @@ public class PlayerManege {
 			}
 			System.out.println("総人数      : " + players.size());
 			System.out.println("所持金が一番のユーザー：");
-			for (Player player : bestList) {
-				showInfo(player);
-			}
-			
+			showInfo(players);
+
 		} else {
 			System.out.println("データがありません");
 
@@ -58,11 +56,12 @@ public class PlayerManege {
 
 	}
 
+	@Override
 	public void showPlayersRank() {
-		Collections.sort(players, new Comparator<Player>() {
+		Collections.sort(players, new Comparator<GamePlayer>() {
 
 			@Override
-			public int compare(Player o1, Player o2) {
+			public int compare(GamePlayer o1, GamePlayer o2) {
 				if (o1.getShojikin() > o2.getShojikin()) {
 					return 1;
 				} else if (o1.getShojikin() < o2.getShojikin()) {
@@ -76,11 +75,12 @@ public class PlayerManege {
 
 	}
 
+	@Override
 	public void sortPlayerById() {
-		Collections.sort(players, new Comparator<Player>() {
+		Collections.sort(players, new Comparator<GamePlayer>() {
 
 			@Override
-			public int compare(Player o1, Player o2) {
+			public int compare(GamePlayer o1, GamePlayer o2) {
 				return o1.getPlayerId().compareTo(o2.getPlayerId());
 			}
 		});
@@ -88,11 +88,12 @@ public class PlayerManege {
 
 	}
 
+	@Override
 	public void sortPlayerByKaisu() {
-		Collections.sort(players, new Comparator<Player>() {
+		Collections.sort(players, new Comparator<GamePlayer>() {
 
 			@Override
-			public int compare(Player o1, Player o2) {
+			public int compare(GamePlayer o1, GamePlayer o2) {
 				if (o1.getKaisu() > o2.getKaisu()) {
 					return 1;
 				} else if (o1.getKaisu() < o2.getKaisu()) {
@@ -106,16 +107,17 @@ public class PlayerManege {
 
 	}
 
+	@Override
 	public void showPlayerBestKaisu() {
-		Set<Player> bestList = new HashSet<Player>();
+		Set<GamePlayer> bestList = new HashSet<GamePlayer>();
 		if (!players.isEmpty()) {
-			Player bestPlayer = players.get(0);
-			for (Player player : players) {	
+			GamePlayer bestPlayer = players.get(0);
+			for (GamePlayer player : players) {
 				if (bestPlayer.getKaisu() <= player.getKaisu()) {
 					bestPlayer = player;
 				}
 			}
-			for(Player player2 : players) {
+			for (GamePlayer player2 : players) {
 				if (bestPlayer.getKaisu() <= player2.getKaisu()) {
 					bestPlayer = player2;
 				}
@@ -123,34 +125,32 @@ public class PlayerManege {
 			}
 			System.out.println("総人数      : " + players.size());
 			System.out.println("総回数が一番のユーザー：");
-			for (Player player : bestList) {
-				showInfo(player);
-			}
+			showInfo(players);
+
 		} else {
 			System.out.println("データがありません");
 
 		}
+
 	}
 
-	private void showPlayers(ArrayList<Player> players) {
+	private  void showInfo(ArrayList<HighCardPlayer> players) {
 		if (!players.isEmpty()) {
-			for (Player player : players) {
-				showInfo(player);
+			String format = "%7s%13s%13d%15d %n";
+			System.out.format("+--------------------------------------------------+%n");
+			System.out.format("  ID    |    名前      |    最後の所持金    |      回数%n");
+			for (GamePlayer player : players) {
+				System.out.format(format, player.getPlayerId(), player.getPlayerName(), player.getShojikin(),
+						player.getKaisu());
+				System.out.format("+--------------------------------------------------+%n");
 
 			}
 		} else {
 			System.out.println("データがありません");
 			System.out.println("やってみましょう　");
+
 		}
-
+	}
+		
 	}
 
-	private void showInfo(Player player) {
-		System.out.println("ID            : " + player.getPlayerId());
-		System.out.println("名前          : " + player.getPlayerName());
-		System.out.println("最後の所持金　  :　" + player.getShojikin());
-		System.out.println("総回数         : " + player.getKaisu());
-		System.out.println("===========================");
-	}
-
-}

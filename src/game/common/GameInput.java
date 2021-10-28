@@ -1,11 +1,33 @@
-package highcard;
+package game.common;
 
 import java.util.Scanner;
 
-import game.common.GameInput;
-
-public final class Input extends GameInput {
+public class GameInput {
 	private static Scanner sc = new Scanner(System.in);
+
+	public static int inputKakekin() {
+		int kakekin = 0;
+		String input = sc.next();
+		boolean check = true;
+		while (check) {
+			try {
+				kakekin = Integer.parseInt(input);
+				check = false;
+				if (kakekin < 0) {
+					System.err.println("非負の掛け金を入力してください");
+					input = sc.next();
+
+
+				}
+
+			} catch (Exception e) {
+				System.err.println("正しく入力してください");
+				input = sc.next();
+
+			}
+		}
+		return kakekin;
+	}
 	public static int inputCard() {
 		int card = 0;
 		String input = sc.next();

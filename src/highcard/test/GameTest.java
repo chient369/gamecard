@@ -3,18 +3,19 @@ package highcard.test;
 import java.util.ArrayList;
 import java.util.Random;
 
+import game.common.player.HighCardPlayerManege;
 import highcard.GameProcess;
 import highcard.card.CardHandler;
-import highcard.player.Player;
-import highcard.player.PlayerManege;
+import highcard.player.HighCardPlayer;
+
 
 public class GameTest {
 	public static void main(String[] args) {		
-		ArrayList<Player> list = new ArrayList<Player>();
+		ArrayList<HighCardPlayer> list = new ArrayList<HighCardPlayer>();
 		Random rand = new Random();
 		//init 50 players
 		for (int i = 0; i < 50; i++) {
-			Player player = new Player("test num" + rand.nextInt(100));
+			HighCardPlayer player = new HighCardPlayer("TEST NO." +rand.nextInt(100)+1);
 			GameProcess gameProcess = new GameProcess(player);
 			//random turns
 			for (int j = 0; j < rand.nextInt(20); j++) {
@@ -28,7 +29,7 @@ public class GameTest {
 //			System.out.println("++++++++++++");
 //		}
 		System.out.println("///////////////////////////////////////");
-		PlayerManege playerManege = new PlayerManege(list);
+		HighCardPlayerManege playerManege = new HighCardPlayerManege();
 		System.out.println("**********show best**********");
 		playerManege.showBestPlayer();
 		System.out.println("**********  show best turns**********");

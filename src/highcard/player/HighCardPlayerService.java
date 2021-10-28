@@ -1,18 +1,23 @@
 package highcard.player;
 
+import game.common.player.GamePlayer;
+import game.common.player.GamePlayerService;
+import game.common.player.HighCardPlayerManege;
 import highcard.Input;
 
-public class PlayerService {
-	private final PlayerManege playerManege;
+public class HighCardPlayerService extends GamePlayerService {
+	private final HighCardPlayerManege playerManege;
 
-	public PlayerService(PlayerManege playerManege) {
+	public HighCardPlayerService(HighCardPlayerManege playerManege) {
+
 		this.playerManege = playerManege;
 	}
-	 
-	public Player createPlayer(String playerName) {
+
+	@Override
+	public GamePlayer createPlayer(String playerName) {
 		return playerManege.createPlayer(playerName);
 	}
-	
+
 	public void playerService() {
 		boolean check = true;
 		while (check) {
@@ -22,7 +27,8 @@ public class PlayerService {
 			int choose = Input.inputChoose();
 			switch (choose) {
 			case 1:
-				playerManege.sortPlayerById();;
+				playerManege.sortPlayerById();
+				;
 				break;
 			case 2:
 				playerManege.showPlayersRank();
@@ -34,18 +40,18 @@ public class PlayerService {
 				playerManege.showPlayerBestKaisu();
 				break;
 			case 5:
-				playerManege.sortPlayerByKaisu();;
+				playerManege.sortPlayerByKaisu();
+				;
 				break;
 			case 0:
-				check =false;
+				check = false;
 				break;
 			default:
 				System.err.println("正しく選択してください");
 				break;
 			}
 		}
-		
+
 	}
-	
 
 }

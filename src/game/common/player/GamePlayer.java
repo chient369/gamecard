@@ -1,8 +1,8 @@
-package highcard.player;
+package game.common.player;
 
 import java.util.Objects;
 
-public class Player {
+public class GamePlayer {
 	private int bonusCount = 0;
 	static private int playerIdCount = 0;
 	private String playerName;
@@ -10,11 +10,11 @@ public class Player {
 	private int shojikin = 1000;
 	private int kaisu = 0;
 
-	public Player() {
+	public GamePlayer() {
 		super();
 	}
 
-	public Player(String playerName) {
+	public GamePlayer(String playerName) {
 		super();
 		this.playerName = playerName;
 		playerId = "NO."+playerIdCount++;
@@ -98,7 +98,7 @@ public class Player {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Player other = (Player) obj;
+		GamePlayer other = (GamePlayer) obj;
 		return Objects.equals(playerId, other.playerId);
 	}
 

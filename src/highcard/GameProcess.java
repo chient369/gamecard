@@ -1,17 +1,17 @@
 package highcard;
 
+import game.common.player.GamePlayer;
 import highcard.card.Card;
 import highcard.card.CardHandler;
-import highcard.player.Player;
 
 public class GameProcess {
-	private Player player;
+	private GamePlayer player;
 
-	public GameProcess(Player player) {
+	public GameProcess(GamePlayer player) {
 		this.player = player;
 	}
 
-	public Player getPlayer() {
+	public GamePlayer getPlayer() {
 		return player;
 	}
 
@@ -45,7 +45,7 @@ public class GameProcess {
 				System.out.println("二枚目 : " + card_2.getCardFull());
 			}
 			shobu.kekka(sentaku, card_1, card_2, kakekin);
-			Player player = shobu.getPlayer();
+			GamePlayer player = shobu.getPlayer();
 			if (player.getShojikin() < 100 || player.getShojikin() > 100000) {
 				if (player.getShojikin() < 0) {
 					player.saigo(kakekin);
