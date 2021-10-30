@@ -1,5 +1,7 @@
 package common;
 
+import java.util.Objects;
+
 public class Card {
 	private int card_num;
 	private String card_symbols;
@@ -55,6 +57,23 @@ public class Card {
 		}
 
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(card_num, card_symbols);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Card) {
+			Card card_1 = (Card) obj;
+			if (this.getCard_num()==card_1.getCard_num() && this.card_symbols.equals(card_1.card_symbols)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 
 //	public static void main(String[] args) {
 //		Card card = new Card(1,"♧");

@@ -4,13 +4,14 @@ import common.GameInput;
 
 public class GamePlayerService {
 	private final GamePlayerManege playerManege;
+
 	public GamePlayerService(GamePlayerManege playerManege) {
 		super();
 		this.playerManege = playerManege;
 	}
 
-	public GamePlayer createPlayer(String playerName) {
-		return playerManege.createPlayer(playerName);
+	public void createPlayer(GamePlayer player) {
+		playerManege.createPlayer(player);
 	}
 
 	public void playerService() {
@@ -36,7 +37,6 @@ public class GamePlayerService {
 				break;
 			case 5:
 				playerManege.sortPlayerByKaisu();
-				;
 				break;
 			case 0:
 				check = false;

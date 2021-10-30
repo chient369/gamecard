@@ -3,20 +3,28 @@ package highcard;
 import common.Card;
 import common.CardHandler;
 import common.GameInput;
+import common.GameProcess;
 import common.player.GamePlayer;
 
-public class GameProcess {
+public class HighCardGameProcess {
+	private GameProcess gameProcess;
 	private GamePlayer player;
 
-	public GameProcess(GamePlayer player) {
-		this.player = player;
+	public HighCardGameProcess() {
+	}
+
+	public HighCardGameProcess(GameProcess gameProcess) {
+		super();
+		this.setGameProcess(gameProcess);
+		this.player = gameProcess.getPlayer();
+
 	}
 
 	public GamePlayer getPlayer() {
-		return player;
+		return gameProcess.getPlayer();
 	}
 
-	public void gameProccess(GameProcess shobu) {
+	public void gameProccess() {
 		boolean keizoku = true;
 		System.out.println("ゲーム開始");
 		System.out.println("🥀🥀🥀🥀🥀🥀🥀🥀🥀🥀");
@@ -45,8 +53,8 @@ public class GameProcess {
 			if (sentaku != 2) {
 				System.out.println("二枚目 : " + card_2.getCardFull());
 			}
-			shobu.kekka(sentaku, card_1, card_2, kakekin);
-			GamePlayer player = shobu.getPlayer();
+			kekka(sentaku, card_1, card_2, kakekin);
+			GamePlayer player = getPlayer();
 			if (player.getShojikin() < 100 || player.getShojikin() > 100000) {
 				if (player.getShojikin() < 0) {
 					player.saigo(kakekin);
@@ -96,7 +104,7 @@ public class GameProcess {
 			System.out.println("BIGピタリ賞  :  \n" + 20 * kakekin);
 			player.pitari(kakekin);
 			player.showPlayer();
-			
+
 		}
 		if (card_2.getCardNum() == sentakuCard.getCard_num()) {
 			System.out.println("おめでとうございます！🎆🎆🎆");
@@ -141,6 +149,14 @@ public class GameProcess {
 
 		}
 		return pitariCard;
+	}
+
+	public GameProcess getGameProcess() {
+		return gameProcess;
+	}
+
+	public void setGameProcess(GameProcess gameProcess) {
+		this.gameProcess = gameProcess;
 	}
 
 //	public static void main(String[] args) {

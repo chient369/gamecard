@@ -96,4 +96,9 @@ public class GameInput {
 		return choose;
 	}
 
+	public static String inputName() {
+		String name = sc.next();
+		return name;
+	}
+
 }
