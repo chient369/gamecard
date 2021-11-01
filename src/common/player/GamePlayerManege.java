@@ -22,11 +22,8 @@ public class GamePlayerManege {
 		this.players = players;
 	}
 
-	public GamePlayer createPlayer(String playerName) {
-		GamePlayer player = new GamePlayer(playerName);
-		players.add(player);
-
-		return player;
+	public void createPlayer(GamePlayer gamePlayer) {
+		players.add(gamePlayer);
 	}
 
 	public void showBestPlayer() {
@@ -132,10 +129,15 @@ public class GamePlayerManege {
 		}
 	}
 
-	private void showPlayers(ArrayList<GamePlayer> players) {
+	private static void showPlayers(ArrayList<GamePlayer> players) {
+
 		if (!players.isEmpty()) {
+			System.out.format("----------------------------------------------------------%n");
+			System.out.format("    ID         名前           最後の所持金　           総回数%n");
 			for (GamePlayer player : players) {
-				showInfo(player);
+				System.out.format("  %-5s%15s%15d%18d%n", player.getPlayerId(), player.getPlayerName(), player.getShojikin(),
+						player.getKaisu());
+				System.out.format("----------------------------------------------------------%n");
 
 			}
 		} else {

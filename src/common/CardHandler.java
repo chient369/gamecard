@@ -5,8 +5,6 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
-import org.w3c.dom.ls.LSOutput;
-
 public class CardHandler {
 	private static Random rand = new Random();
 	private static int[] card_nums = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
@@ -18,18 +16,19 @@ public class CardHandler {
 		this.card = getCard();
 	}
 
-	private static Card getCard() {
-		Card card = new Card(card_nums[rand.nextInt(13)], card_symbols[rand.nextInt(3)]);
-		while (cardRepos.contains(card)) {
-			System.out.println("loi :"+card.getCardFull());
-			card = new Card(card_nums[rand.nextInt(13)], card_symbols[rand.nextInt(3)]);
-
+	public static Card getCard() {
+		Card game_card = new Card(card_nums[rand.nextInt(13)], card_symbols[rand.nextInt(3)]);
+		while (cardRepos.contains(game_card)) {
+			game_card = new Card(card_nums[rand.nextInt(13)], card_symbols[rand.nextInt(3)]);
 		}
-		cardRepos.add(card);
-		return card;
+		cardRepos.add(game_card);
+		if (cardRepos.size() > 5) {
+			cardRepos.clear();
+		}
+		return game_card;
 	}
 
-	public  void showCardRepo() {
+	public void showCardRepo() {
 		Iterator<Card> it = cardRepos.iterator();
 		while (it.hasNext()) {
 			Card card = (Card) it.next();
@@ -62,12 +61,12 @@ public class CardHandler {
 	}
 
 //	public static void main(String[] args) {
-//	for (int i = 0; i < 60; i++) {
-//		Card card = getCard();
-//		//System.out.println(card.getCardFull());
+//		System.out.println(cardRepos.size());
+//		for (int i = 0; i < 10; i++) {
+//			Card card = getCard();
+//			System.out.println(card.getCardFull());
+//		}
+//		System.out.println(cardRepos.size());
 //	}
-//	showCardRepo();
-//}	
-
 
 }

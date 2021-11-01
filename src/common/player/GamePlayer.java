@@ -1,19 +1,16 @@
 package common.player;
 
-
-
 import java.util.Objects;
 
 public class GamePlayer {
 	private int bonusCount = 0;
 	static private int playerIdCount = 0;
-	private String playerName;
+	private  String playerName;
 	private String playerId = null;
 	private int shojikin = 1000;
 	private int kaisu = 0;
 
 	public GamePlayer() {
-		super();
 	}
 
 	public GamePlayer(String playerName) {
@@ -75,17 +72,16 @@ public class GamePlayer {
 	}
 
 	public void saigo(int saigokakekin) {
-//		if (shojikin > 100000) {
-//			shojikin -= saigokakekin;
-//
-//		}
+		if (shojikin > 100000) {
+			shojikin -= saigokakekin;
+
+		}
 		if (shojikin < 100) {
 			shojikin += saigokakekin;
 
 		}
 
 	}
-	
 
 	@Override
 	public int hashCode() {
