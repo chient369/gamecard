@@ -17,7 +17,6 @@ public final class HighCardMain {
 			int choose = GameInput.inputSentaku();
 			switch (choose) {
 			case 1:
-				System.out.println("あなたの名前を入力してください");
 				HighCardGameProcess hc_process = new HighCardGameProcess(gameProcess);
 				hc_process.gameProccess();
 				break;

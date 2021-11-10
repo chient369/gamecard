@@ -16,7 +16,7 @@ public class GameTest {
 		//init 50 players
 		for (int i = 0; i < 10; i++) {
 			GamePlayer player = new GamePlayer("test num" + rand.nextInt(100));
-			HighCardGameProcess hCardGameProcess = new HighCardGameProcess(player);
+			HighCardGameProcess hCardGameProcess = new HighCardGameProcess(new GameProcess(player));
 			//random turns
 			for (int j = 0; j < rand.nextInt(20); j++) {
 				hCardGameProcess.kekka(1, new CardHandler(), new CardHandler(), rand.nextInt(1000));

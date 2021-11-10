@@ -77,7 +77,8 @@ public class Card {
 
 //	public static void main(String[] args) {
 //		Card card = new Card(1,"♧");
-//		System.out.println(card.getCardFull());
+//		Card card2 = new Card(1,"♧");
+//		System.out.println(card.equals(card2));
 //	}
 
 }

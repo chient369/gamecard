@@ -89,7 +89,6 @@ public class GameInput {
 			} catch (Exception e) {
 				System.err.println("正しく入力してください");
 				input = sc.next();
-				check = true;
 
 			}
 		}
@@ -97,8 +96,7 @@ public class GameInput {
 	}
 
 	public static String inputName() {
-		String name = sc.next();
-		return name;
+		return sc.next();
 	}
 
 }

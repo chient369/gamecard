@@ -63,10 +63,10 @@ public class PokerGameProcess {
 
 		if (pGameRules.isStraight(fiveCards)) {
 			int bonus = pGameRules.straightBonus(kakekin);
-			pGameRules.addTurned(fiveCards, bonus, player.getShojikin() + bonus);
+			pGameRules.addTurned(fiveCards, bonus, player.getShojikin());
 		} else if (pGameRules.isFlush(fiveCards)) {
 			int bonus = pGameRules.flushBonus(kakekin);
-			pGameRules.addTurned(fiveCards, bonus, player.getShojikin() + bonus);
+			pGameRules.addTurned(fiveCards, bonus, player.getShojikin());
 		} else {
 			pGameRules.isTwoPairOrThreeOrFour(fiveCards, kakekin);
 		}
