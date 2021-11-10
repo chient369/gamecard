@@ -14,22 +14,14 @@ import poker.turned.TurnedHandle;
 
 public class PokerGameRules {
 	private TurnedHandle turnedHandle;
-	private GameProcess gameProcess;
+
 	private GamePlayer player;
 
 	public PokerGameRules(GameProcess gameProcess) {
 		super();
-		this.gameProcess = gameProcess;
+
 		this.player = gameProcess.getPlayer();
 		this.turnedHandle = new TurnedHandle();
-	}
-
-	public GameProcess getGameProcess() {
-		return gameProcess;
-	}
-
-	public void setGameProcess(GameProcess gameProcess) {
-		this.gameProcess = gameProcess;
 	}
 
 	public GamePlayer getPlayer() {
@@ -185,8 +177,8 @@ public class PokerGameRules {
 	}
 
 	public int lose(int kakekin) {
-		 player.setShojikin(player.getShojikin() - kakekin);
-		 return player.getShojikin();
+		player.setShojikin(player.getShojikin() - kakekin);
+		return player.getShojikin();
 	}
 
 	public void addTurned(ArrayList<Card> fiveCards, int kakekin, int shojikin) {

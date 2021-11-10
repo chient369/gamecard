@@ -9,7 +9,7 @@ public class CardHandlerTest {
 			cardHandler = new CardHandler();
 
 		}
-		cardHandler.showCardRepo();
+		
 
 	}
 
