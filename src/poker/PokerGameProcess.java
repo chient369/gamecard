@@ -6,6 +6,7 @@ import common.Card;
 import common.GameInput;
 import common.GameProcess;
 import common.player.GamePlayer;
+import poker.turned.Result;
 import poker.turned.Turned;
 
 public class PokerGameProcess {
@@ -16,19 +17,14 @@ public class PokerGameProcess {
 	public PokerGameProcess() {
 	}
 
-	public PokerGameProcess(GameProcess gameProcess) {
-		super();
-		this.gameProcess = gameProcess;
-		this.pGameRules = new PokerGameRules(gameProcess);
-		player = pGameRules.getPlayer();
-	}
-
 	public GameProcess getGameProcess() {
 		return gameProcess;
 	}
 
-	public void setGameProcess(GameProcess gameProcess) {
-		this.gameProcess = gameProcess;
+	public PokerGameProcess(GameProcess gameProcess) {
+		super();
+		this.pGameRules = new PokerGameRules(gameProcess);
+		player = pGameRules.getPlayer();
 	}
 
 	public void oneTurn() {
@@ -39,7 +35,6 @@ public class PokerGameProcess {
 	}
 
 	public void tenTurns() {
-		pGameRules.clearTurned();
 		System.out.print("掛け金を入力してください : ");
 		int kakekin = GameInput.inputKakekin();
 		int tenKakekin = kakekin * 10;
@@ -49,7 +44,7 @@ public class PokerGameProcess {
 				oneTurnProcess(kakekin);
 			}
 
-			showTenTurns();
+			showTenTurned();
 			pGameRules.showPlayer();
 		} else {
 			System.err.println("所持金が足りません");
@@ -63,25 +58,52 @@ public class PokerGameProcess {
 
 		if (pGameRules.isStraight(fiveCards)) {
 			int bonus = pGameRules.straightBonus(kakekin);
-			pGameRules.addTurned(fiveCards, bonus, player.getShojikin());
+			pGameRules.addTurned(fiveCards, Result.STRAIGHT.getName(), bonus, player.getShojikin());
 		} else if (pGameRules.isFlush(fiveCards)) {
 			int bonus = pGameRules.flushBonus(kakekin);
-			pGameRules.addTurned(fiveCards, bonus, player.getShojikin());
+			pGameRules.addTurned(fiveCards, Result.FLUSH.getName(), bonus, player.getShojikin());
 		} else {
 			pGameRules.isTwoPairOrThreeOrFour(fiveCards, kakekin);
+		}
+		pGameRules.showPlayer();
+
+	}
+
+	private void showTenTurned() {
+		int turnedLenght = pGameRules.getTurnedList().size();
+		ArrayList<Turned> turneds = pGameRules.getTurnedList();
+		String fomat = "    %-10d%-25s%-15d%-15d%n";
+		System.out.format("  回数目          カード群              結果          所持金%n");
+		if (pGameRules.getTurnedList().size() > 9) {
+			for (int i = turnedLenght - 10; i < turnedLenght; i++) {
+				Turned turned = turneds.get(i);
+				System.out.format(fomat, turned.getTurn_num(), turned.getCards(), turned.getResult(),
+						turned.getShojikin());
+			}
+
+		} else {
+			for (Turned turned : turneds) {
+				System.out.format(fomat, turned.getTurn_num(), turned.getCards(), turned.getResult(),
+						turned.getShojikin());
+			}
 		}
 
 	}
 
-	private void showTenTurns() {
+	public void showTurned() {
+		System.out.println("                          履歴          \n");
 		ArrayList<Turned> turneds = pGameRules.getTurnedList();
-		String fomat = "    %-10d%-25s%-15d%-15d%n";
-		System.out.format("  回数目            カード群              結果          所持金　　%n");
-		for (Turned turned : turneds) {
-			System.out.format(fomat, turned.getTurn_num(), turned.getCards(), turned.getResult(), turned.getShojikin());
+		if (turneds.isEmpty()) {
+			System.out.println("              --------データがありません----------");
+		} else {
+			String fomat = "    %-10d%-25s%-25s%-15d%-15d%n";
+			System.out.format("  回数目          カード群                結果                    変動           所持金　　%n");
+			for (Turned turned : turneds) {
+				System.out.format(fomat, turned.getTurn_num(), turned.getCards(), turned.getResultName(),
+						turned.getResult(),
+						turned.getShojikin());
+			}
 		}
-		pGameRules.clearTurned();
-
 	}
 
 	private boolean isEnoughMoney(int kakekin) {

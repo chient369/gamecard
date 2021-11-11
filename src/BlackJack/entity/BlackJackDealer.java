@@ -22,12 +22,6 @@ public class BlackJackDealer extends BlackJackDealt {
 		this.dealerHand = dealerHand;
 	}
 
-	@Override
-	public void hit() {
-		super.getBlackJackHandle().draw();
-
-	}
-
 	public BJResult dealerTurn() {
 		super.getBlackJackHandle().showHand();
 		BJResult result = null;

@@ -15,8 +15,9 @@ public class main {
 		System.out.println("こんにちは。 " + gameProcess.getPlayer().getPlayerName());
 		System.out.println("ゲームをやりましょう");
 
-		boolean loop = true;
-		while (loop) {
+		boolean loop_check = true;
+		while (loop_check) {
+
 			System.out.println("  1. ハイカード \n  2. ポーカー\n  3. 情報参照\n  0. ゲーム終了");
 			int choose = GameInput.inputChoose();
 			switch (choose) {
@@ -31,7 +32,7 @@ public class main {
 				break;
 			case 0:
 				System.out.println("さよなら");
-				loop = false;
+				loop_check = false;
 				break;
 			default:
 				System.err.println("正しく選択してください");

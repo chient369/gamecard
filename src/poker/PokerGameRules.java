@@ -9,6 +9,7 @@ import java.util.Set;
 import common.Card;
 import common.GameProcess;
 import common.player.GamePlayer;
+import poker.turned.Result;
 import poker.turned.Turned;
 import poker.turned.TurnedHandle;
 
@@ -43,24 +44,24 @@ public class PokerGameRules {
 		if (cnt == 2) {
 			if (filter2.size() == 1) {
 				int bonus = threeCardBonus(kakekin);
-				addTurned(fiveCards, bonus, player.getShojikin());
+				addTurned(fiveCards,Result.THREE_CARD.getName() , bonus, player.getShojikin());
 			} else {
 				int bonus = twoPairBonus(kakekin);
-				addTurned(fiveCards, bonus, player.getShojikin());
+				addTurned(fiveCards,Result.TWO_PAIR.getName(), bonus, player.getShojikin());
 			}
 		} else if (cnt == 3) {
 			if (filter2.size() == 2) {
-				int bonus = doubleBonus(kakekin);
-				addTurned(fiveCards, bonus, player.getShojikin());
+				int bonus = fullHouse(kakekin);
+				addTurned(fiveCards,Result.FULL_HOUSE.getName(), bonus, player.getShojikin());
 			} else {
 				int bonus = fourCardBonus(kakekin);
-				addTurned(fiveCards, bonus, player.getShojikin());
+				addTurned(fiveCards,Result.FOUR_CARD.getName(), bonus, player.getShojikin());
 			}
 		} else {
 			int shojikin = lose(kakekin);
 			System.out.print("残念。配当はありません ");
 			System.out.println("- " + kakekin);
-			addTurned(fiveCards, -kakekin, shojikin);
+			addTurned(fiveCards,Result.NOTHING.getName(), -kakekin, shojikin);
 		}
 		fiveCards.clear();
 		filter2.clear();
@@ -112,6 +113,22 @@ public class PokerGameRules {
 		return isStraight;
 	}
 
+	public boolean isRoyalStraightFlush(ArrayList<Card> fiveCards) {
+		boolean isRoyal = true;
+		if (this.isStraight(fiveCards)&&this.isFlush(fiveCards)) {
+			for (int i = 0; i < fiveCards.size(); i++) {
+				if (fiveCards.get(i).getCard_num() >= 10) {
+					continue;
+				}else {
+					isRoyal = false;
+				}
+			}
+
+		}
+		return isRoyal;
+
+	}
+
 	// show fiveCards
 	public void showCardsList(ArrayList<Card> fiveCards) {
 		for (Card card : fiveCards) {
@@ -141,7 +158,7 @@ public class PokerGameRules {
 		return kakekin * 12;
 	}
 
-	private int doubleBonus(int kakekin) {
+	private int fullHouse(int kakekin) {
 		player.setShojikin(player.getShojikin() + kakekin * 50);
 		System.out.println("double bonus + " + kakekin * 50);
 		showPlayer();
@@ -181,20 +198,20 @@ public class PokerGameRules {
 		return player.getShojikin();
 	}
 
-	public void addTurned(ArrayList<Card> fiveCards, int kakekin, int shojikin) {
+	public void addTurned(ArrayList<Card> fiveCards,String resultName, int kakekin, int shojikin) {
 		String cards = "";
 		for (Card card : fiveCards) {
 			cards += card.getCardFull() + " ";
 		}
-		turnedHandle.addTurned(cards, kakekin, shojikin);
+		turnedHandle.addTurned(cards,resultName, kakekin, shojikin);
 	}
 
 	public ArrayList<Turned> getTurnedList() {
 		return turnedHandle.getTurnedList();
 	}
 
-	public void clearTurned() {
-		turnedHandle.clearTurned();
-	}
+//	public void clearTurned() {
+//		turnedHandle.clearTurned();
+//	}
 
 }
