@@ -1,7 +1,6 @@
 package highcard;
 
 import common.Card;
-import common.CardHandler;
 import common.GameInput;
 import common.GameProcess;
 import common.player.GamePlayer;
@@ -9,6 +8,7 @@ import common.player.GamePlayer;
 public class HighCardGameProcess {
 	private GameProcess gameProcess;
 	private GamePlayer player;
+	private HighCardHandler cardHandler;
 
 	public HighCardGameProcess() {
 	}
@@ -17,7 +17,11 @@ public class HighCardGameProcess {
 		super();
 		this.setGameProcess(gameProcess);
 		this.player = gameProcess.getPlayer();
+		cardHandler = new HighCardHandler();
+	}
 
+	public HighCardHandler getCardHandler() {
+		return cardHandler;
 	}
 
 	public GamePlayer getPlayer() {
@@ -44,16 +48,16 @@ public class HighCardGameProcess {
 
 			}
 
-			CardHandler card_1 = new CardHandler();
+			Card card_1 = cardHandler.getCard();
 			System.out.println("一枚目 : " + card_1.getCardFull());
 
 			System.out.println("二枚目 は 一枚目1 より： \n 0. 弱い \n 1. 強い \n 2. ピタリ賞を狙う");
 			int sentaku = GameInput.inputSentaku();
-			CardHandler card_2 = new CardHandler();
+			Card card_2 = cardHandler.getCard();
 			if (sentaku != 2) {
 				System.out.println("二枚目 : " + card_2.getCardFull());
 			}
-			kekka(sentaku, card_1, card_2, kakekin);
+			process(sentaku, card_1, card_2, kakekin);
 			GamePlayer player = getPlayer();
 			if (player.getShojikin() < 100 || player.getShojikin() > 100000) {
 				if (player.getShojikin() < 0) {
@@ -69,9 +73,9 @@ public class HighCardGameProcess {
 
 	}
 
-	public void kekka(int sentaku, CardHandler card_1, CardHandler card_2, int kakekin) {
+	public void process(int sentaku, Card card_1, Card card_2, int kakekin) {
 		if (sentaku == 0) {
-			if (card_1.isBiggerThan(card_2)) {
+			if (card_1.getCard_num() > card_2.getCard_num()) {
 				player.kachi(kakekin);
 				player.showPlayer();
 
@@ -81,7 +85,7 @@ public class HighCardGameProcess {
 			}
 
 		} else if (sentaku == 1) {
-			if (card_2.isBiggerThan(card_1)) {
+			if (card_1.getCard_num() < card_2.getCard_num()) {
 				player.kachi(kakekin);
 				player.showPlayer();
 			} else {
@@ -95,7 +99,7 @@ public class HighCardGameProcess {
 		}
 	}
 
-	public void pitari(CardHandler card_2, int kakekin) {
+	public void pitari(Card card_2, int kakekin) {
 		Card sentakuCard = subPitari();
 		System.out.println("あなたの選択したカードは " + sentakuCard.getCardFull());
 		System.out.println("結果。。。。  二枚目　は " + card_2.getCardFull());
@@ -106,7 +110,7 @@ public class HighCardGameProcess {
 			player.showPlayer();
 
 		}
-		if (card_2.getCardNum() == sentakuCard.getCard_num()) {
+		if (card_2.getCard_num() == sentakuCard.getCard_num()) {
 			System.out.println("おめでとうございます！🎆🎆🎆");
 			System.out.printf("ピタリ賞 : %d \n", 12 * kakekin);
 			player.pitari(kakekin);
@@ -116,7 +120,7 @@ public class HighCardGameProcess {
 		}
 	}
 
-	private static Card subPitari() {
+	private Card subPitari() {
 		Card pitariCard = null;
 		System.out.print("次のカードはどの数値と思いますか : ");
 		int yosoku = GameInput.inputCard();
@@ -126,16 +130,16 @@ public class HighCardGameProcess {
 		while (loopCheck) {
 			switch (sentk) {
 			case 1:
-				pitariCard = new CardHandler().setCard(yosoku, "♥");
+				pitariCard = cardHandler.setCard(yosoku, "♥");
 				break;
 			case 2:
-				pitariCard = new CardHandler().setCard(yosoku, "♣");
+				pitariCard = cardHandler.setCard(yosoku, "♣");
 				break;
 			case 3:
-				pitariCard = new CardHandler().setCard(yosoku, "♦");
+				pitariCard = cardHandler.setCard(yosoku, "♦");
 				break;
 			case 4:
-				pitariCard = new CardHandler().setCard(yosoku, "♠");
+				pitariCard = cardHandler.setCard(yosoku, "♠");
 				break;
 			default:
 				System.out.println("正しく選択してください");

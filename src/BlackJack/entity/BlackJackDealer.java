@@ -3,33 +3,44 @@ package BlackJack.entity;
 import java.util.ArrayList;
 
 import BlackJack.BlackJackDealt;
+import BlackJack.BlackJackHandle;
 import common.Card;
 
 public class BlackJackDealer extends BlackJackDealt {
 
 	private ArrayList<Card> dealerHand;
 
-	public BlackJackDealer() {
-		super();
-		this.dealerHand = getHandCards();
+	public BlackJackDealer(BlackJackHandle blackJackHandle) {
+		super(blackJackHandle);
+		this.dealerHand = initHandCards();
 	}
 
 	public ArrayList<Card> getDealerHand() {
 		return dealerHand;
 	}
 
-	public void setDealerHand(ArrayList<Card> dealerHand) {
-		this.dealerHand = dealerHand;
+	@Override
+	protected ArrayList<Card> initHandCards() {
+		return BlackJackHandle.getInitialCards();
 	}
 
 	@Override
-	public void hit() {
-		super.getBlackJackHandle().draw();
+	protected void hitCards() {
+		Card card = super.hit();
+		dealerHand.add(card);
+	}
+
+	@Override
+	protected void showHand() {
+		for (Card card : dealerHand) {
+			System.out.print(card.getCardFull() + "  ");
+		}
 
 	}
 
 	public BJResult dealerTurn() {
-		super.getBlackJackHandle().showHand();
+		System.out.println("It's Dealer");
+		this.showHand();
 		BJResult result = null;
 		if (super.isBanBan(dealerHand)) {
 			result = BJResult.BAN_BAN;
@@ -39,16 +50,23 @@ public class BlackJackDealer extends BlackJackDealt {
 		} else {
 			int dealerPoint = dealerOfCurrentPoint(dealerHand);
 			while (dealerPoint < 16) {
-				this.hit();
-				super.getBlackJackHandle().showHand();
-				dealerPoint = dealerOfCurrentPoint(super.getHandCards());
+				this.hitCards();
+				this.showHand();
+				dealerPoint = dealerOfCurrentPoint(dealerHand);
+				if (dealerHand.size() == 5) {
+					result = BJResult.FIVE_DRAGON;
+					break;
+				}
+			}
+
+			if (dealerOfCurrentPoint(dealerHand) < 16 && dealerHand.size() < 5 && dealerHand.size() > 3) {
+				toGetFiveDragon(dealerHand);
 			}
 			if (isFiveDragonHands(dealerHand)) {
 				result = BJResult.FIVE_DRAGON;
-			}
-			if (dealerPoint <= 21) {
-				BJResult.FREE_HAND.setValue(dealerPoint);
-				result = BJResult.FREE_HAND;
+			} else if (dealerPoint <= 21) {
+				BJResult.DEALER_OF_FREE_HAND.setValue(dealerPoint);
+				result = BJResult.DEALER_OF_FREE_HAND;
 			} else {
 				result = BJResult.BUSTS;
 
@@ -58,30 +76,26 @@ public class BlackJackDealer extends BlackJackDealt {
 	}
 
 	public ArrayList<Card> toGetFiveDragon(ArrayList<Card> currentCards) {
-		ArrayList<Card> fiveDragons = currentCards;
-		if (dealerOfCurrentPoint(currentCards) < 14 && currentCards.size() <= 5 && currentCards.size() >= 3) {
-			this.hit();
-			fiveDragons = this.getHandCards();
-			toGetFiveDragon(fiveDragons);
+		if (dealerOfCurrentPoint(dealerHand) < 14 && dealerHand.size() <= 5 && dealerHand.size() >= 3) {
+			this.hitCards();
+			toGetFiveDragon(dealerHand);
 		}
-		return fiveDragons;
-	}
-
-	public boolean isFiveDragonHands(ArrayList<Card> currentCards) {
-		ArrayList<Card> fiveDragons = toGetFiveDragon(currentCards);
-		return (fiveDragons.size() == 5 && dealerOfCurrentPoint(fiveDragons) <= 21) ? true : false;
-
+		return dealerHand;
 	}
 
 	private int dealerOfCurrentPoint(ArrayList<Card> hanCards) {
-		return super.getBlackJackHandle().CurrentPoint(hanCards);
+		return super.CurrentPoint(hanCards);
 
 	}
 
-	public static void main(String[] args) {
-		BlackJackDealer blackJackDealer = new BlackJackDealer();
-		BJResult rs = blackJackDealer.dealerTurn();
-		System.out.println(rs);
-	}
+//	public static void main(String[] args) {
+//		for (int i = 0; i < 50; i++) {
+//			BlackJackDealer blackJackDealer = new BlackJackDealer();
+//			BJResult rs = blackJackDealer.dealerTurn();
+//			System.out.println(rs);
+//			System.out.println(i + "-------------------");
+//
+//		}
+//	}
 
 }

@@ -1,27 +1,31 @@
-package BlackJack.entity;
+package BlackJack;
 
 import java.util.ArrayList;
 
-import BlackJack.BlackJackCard;
 import common.Card;
+import common.CardHandler;
 
-public class BlackJackHandle extends BlackJackCard {
-	private ArrayList<Card> cardList;
+public class BlackJackHandle {
+	private static CardHandler cardHandler;
 
 	public BlackJackHandle() {
-		super();
-		this.cardList = super.getInitialCards();
+		cardHandler = new CardHandler();
 	}
 
-	public void draw() {
-		Card card = super.drawCard();
-		cardList.add(card);
-	}
-
-	public void showHand() {
-		for (Card card : cardList) {
-			System.out.print(card.getCardFull() + "  ");
+	public static ArrayList<Card> getInitialCards() {
+		ArrayList<Card> initCards = new ArrayList<Card>();
+		for (int i = 0; i < 2; i++) {
+			Card card = cardHandler.getCard();
+			initCards.add(card);
 		}
+
+		return initCards;
+
+	}
+
+//withdraw one by one
+	public synchronized Card hitCard() {
+		return cardHandler.getCard();
 	}
 
 	public int CurrentPoint(ArrayList<Card> cardList) {
@@ -54,18 +58,31 @@ public class BlackJackHandle extends BlackJackCard {
 
 	public int isHasAcePoint(ArrayList<Card> cards) {
 		int subTotal = 0;
+		int aceCount = 0;
+		int ace_point = 1;
 		for (Card card : cards) {
 			if (card.getCard_num() != 1) {
-				subTotal += card.getCard_num();
+				if (card.getCard_num() > 10) {
+					subTotal += 10;
+				} else {
+					subTotal += card.getCard_num();
+				}
 			}
 			if (card.getCard_num() == 1) {
-				if (cards.size() == 3) {
-					subTotal += 10;
-				} else if (cards.size() == 2) {
-					subTotal += 11;
+				aceCount++;
+				if (cards.size() == 2) {
+					ace_point = 11;
+				} else if (cards.size() == 3 && aceCount >= 1) {
+					ace_point = 10;
 				} else {
-					subTotal += 1;
+					ace_point = 1;
 				}
+				subTotal += ace_point;
+
+			}
+			if (subTotal > 21 && aceCount >= 1 && cards.size() <= 3) {
+				subTotal = subTotal - aceCount * 10 + aceCount;
+
 			}
 		}
 		return subTotal;
@@ -80,10 +97,6 @@ public class BlackJackHandle extends BlackJackCard {
 			}
 		}
 		return hasAce;
-	}
-
-	public ArrayList<Card> getCardList() {
-		return cardList;
 	}
 
 }

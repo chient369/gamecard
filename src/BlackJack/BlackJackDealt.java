@@ -2,30 +2,33 @@ package BlackJack;
 
 import java.util.ArrayList;
 
-import BlackJack.entity.BlackJackHandle;
 import common.Card;
 
-
-public class BlackJackDealt {
+public abstract class BlackJackDealt implements Runnable {
 	private BlackJackHandle blackJackHandle;
 
 	public BlackJackDealt() {
-		this.blackJackHandle = new BlackJackHandle();
+	}
+
+	public BlackJackDealt(BlackJackHandle blackJackHandle) {
+		super();
+		this.blackJackHandle = blackJackHandle;
 	}
 
 	public BlackJackHandle getBlackJackHandle() {
 		return blackJackHandle;
 	}
 
-
-	public ArrayList<Card> getHandCards() {
-		return blackJackHandle.getCardList();
-	}
-
 	/***********************************/
-	public void hit() {
-		blackJackHandle.draw();
+	public Card hit() {
+		return blackJackHandle.hitCard();
 	}
+
+	protected abstract ArrayList<Card> initHandCards();
+
+	protected abstract void hitCards();
+
+	protected abstract void showHand();
 
 	// Ace + (10/J/Q/K) = ban-luck
 	public boolean isBanLuck(ArrayList<Card> handCards) {
@@ -45,7 +48,7 @@ public class BlackJackDealt {
 	public boolean isBanBan(ArrayList<Card> handCards) {
 		boolean isBanBan = true;
 		for (Card card : handCards) {
-			if (card.getCard_num() !=1) {
+			if (card.getCard_num() != 1) {
 				isBanBan = false;
 			}
 		}
@@ -57,10 +60,20 @@ public class BlackJackDealt {
 	public boolean isBust(ArrayList<Card> handCards) {
 		return blackJackHandle.totalPoint(handCards) > 21 ? true : false;
 	}
-	/* to get 5-Dragon
-	 * 5-Dragon is number of cards = 5 and total <= 21
-	 * */
-	
+
+	public int CurrentPoint(ArrayList<Card> cardList) {
+		return blackJackHandle.CurrentPoint(cardList);
+	}
+
+	public boolean isFiveDragonHands(ArrayList<Card> currentCards) {
+		return (currentCards.size() == 5 && CurrentPoint(currentCards) <= 21) ? true : false;
+
+	}
+
+	@Override
+	public void run() {
+
+	}
 
 //	public static void main(String[] args) {
 //		BlackJackDealt blackJackDealt = new BlackJackDealt();
@@ -71,8 +84,8 @@ public class BlackJackDealt {
 //		blackJackHandle.showHand();
 //		blackJackHandle.CurrentPoint(handCards);
 //		System.out.println();
-//		System.out.println("is ban ban :" +blackJackDealt.isBanBan(handCards));
-//		System.out.println("is ban luck : " +blackJackDealt.isBanLuck(handCards));
+//		System.out.println("is ban ban :" + blackJackDealt.isBanBan(handCards));
+//		System.out.println("is ban luck : " + blackJackDealt.isBanLuck(handCards));
 //		System.out.println("1 turns hit of hand cards");
 //		blackJackDealt.hit();
 //		System.out.println("is bust : " + blackJackDealt.isBust(handCards));
