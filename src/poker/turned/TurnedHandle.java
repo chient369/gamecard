@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class TurnedHandle {
 	private ArrayList<Turned> turnedList ;
-	
+
 
 	public TurnedHandle() {
 		turnedList = new ArrayList<Turned>();
 	}
-	
+
 
 	public ArrayList<Turned> getTurnedList() {
 		return turnedList;
@@ -21,9 +21,10 @@ public class TurnedHandle {
 
 
 
-	public void addTurned(String cards, int kakekin, int shojikin) {
-		turnedList.add(new Turned(cards, kakekin, shojikin));
+	public void addTurned(String cards,String resultName, int kakekin, int shojikin) {
+		turnedList.add(new Turned(cards, resultName, kakekin, shojikin));
 	}
+
 	public void clearTurned() {
 		this.turnedList.clear();
 	}

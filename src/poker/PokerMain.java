@@ -9,7 +9,7 @@ public final class PokerMain {
 		boolean loop = true;
 		System.out.println("こんにちは、ポーカーゲームをようこそ");
 		while (loop) {
-			System.out.println("  1. 単発 \n  2.連10回 \n  3.ルールを見る\n  0.戻る");
+			System.out.println("  1. 単発 \n  2.連10回 \n  3.ルールを見る\n  4.履歴\n  0.戻る");
 			int choose = GameInput.inputChoose();
 			switch (choose) {
 			case 1:
@@ -20,6 +20,9 @@ public final class PokerMain {
 				break;
 			case 3:
 				System.out.println("まだ終わらない");
+				break;
+			case 4:
+				process.showTurned();
 				break;
 			case 0:
 				System.out.println("ありがとうございます。");

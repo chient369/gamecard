@@ -125,7 +125,7 @@ public class HighCardGameProcess {
 		System.out.print("次のカードはどの数値と思いますか : ");
 		int yosoku = GameInput.inputCard();
 		boolean loopCheck = true;
-		System.out.println("絵柄は:\n 1. ♥\n 2. ♣\n 3. ♦\n 4. ♠");
+		System.out.println("絵柄は: 1. ♥  2. ♣  3. ♦  4. ♠");
 		int sentk = GameInput.inputChoose();
 		while (loopCheck) {
 			switch (sentk) {

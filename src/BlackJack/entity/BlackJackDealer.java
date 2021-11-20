@@ -24,6 +24,7 @@ public class BlackJackDealer extends BlackJackDealt {
 		return BlackJackHandle.getInitialCards();
 	}
 
+<<<<<<< HEAD
 	@Override
 	protected void hitCards() {
 		Card card = super.hit();
@@ -38,6 +39,8 @@ public class BlackJackDealer extends BlackJackDealt {
 
 	}
 
+=======
+>>>>>>> a5a6c5de6878b4c2253fbbe17ae4bff58a08936d
 	public BJResult dealerTurn() {
 		System.out.println("It's Dealer");
 		this.showHand();
