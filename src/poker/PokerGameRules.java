@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import common.Card;
-import common.GameProcess;
 import common.player.GamePlayer;
 import poker.turned.Result;
 import poker.turned.Turned;
@@ -18,10 +17,10 @@ public class PokerGameRules {
 
 	private GamePlayer player;
 
-	public PokerGameRules(GameProcess gameProcess) {
+	public PokerGameRules(GamePlayer player) {
 		super();
 
-		this.player = gameProcess.getPlayer();
+		this.player = player;
 		this.turnedHandle = new TurnedHandle();
 	}
 
@@ -44,24 +43,24 @@ public class PokerGameRules {
 		if (cnt == 2) {
 			if (filter2.size() == 1) {
 				int bonus = threeCardBonus(kakekin);
-				addTurned(fiveCards,Result.THREE_CARD.getName() , bonus, player.getShojikin());
+				addTurned(fiveCards, Result.THREE_CARD.getName(), bonus, player.getShojikin());
 			} else {
 				int bonus = twoPairBonus(kakekin);
-				addTurned(fiveCards,Result.TWO_PAIR.getName(), bonus, player.getShojikin());
+				addTurned(fiveCards, Result.TWO_PAIR.getName(), bonus, player.getShojikin());
 			}
 		} else if (cnt == 3) {
 			if (filter2.size() == 2) {
 				int bonus = fullHouse(kakekin);
-				addTurned(fiveCards,Result.FULL_HOUSE.getName(), bonus, player.getShojikin());
+				addTurned(fiveCards, Result.FULL_HOUSE.getName(), bonus, player.getShojikin());
 			} else {
 				int bonus = fourCardBonus(kakekin);
-				addTurned(fiveCards,Result.FOUR_CARD.getName(), bonus, player.getShojikin());
+				addTurned(fiveCards, Result.FOUR_CARD.getName(), bonus, player.getShojikin());
 			}
 		} else {
 			int shojikin = lose(kakekin);
 			System.out.print("残念。配当はありません ");
 			System.out.println("- " + kakekin);
-			addTurned(fiveCards,Result.NOTHING.getName(), -kakekin, shojikin);
+			addTurned(fiveCards, Result.NOTHING.getName(), -kakekin, shojikin);
 		}
 		fiveCards.clear();
 		filter2.clear();
@@ -115,11 +114,11 @@ public class PokerGameRules {
 
 	public boolean isRoyalStraightFlush(ArrayList<Card> fiveCards) {
 		boolean isRoyal = true;
-		if (this.isStraight(fiveCards)&&this.isFlush(fiveCards)) {
+		if (this.isStraight(fiveCards) && this.isFlush(fiveCards)) {
 			for (int i = 0; i < fiveCards.size(); i++) {
 				if (fiveCards.get(i).getCard_num() >= 10) {
 					continue;
-				}else {
+				} else {
 					isRoyal = false;
 				}
 			}
@@ -198,12 +197,12 @@ public class PokerGameRules {
 		return player.getShojikin();
 	}
 
-	public void addTurned(ArrayList<Card> fiveCards,String resultName, int kakekin, int shojikin) {
+	public void addTurned(ArrayList<Card> fiveCards, String resultName, int kakekin, int shojikin) {
 		String cards = "";
 		for (Card card : fiveCards) {
 			cards += card.getCardFull() + " ";
 		}
-		turnedHandle.addTurned(cards,resultName, kakekin, shojikin);
+		turnedHandle.addTurned(cards, resultName, kakekin, shojikin);
 	}
 
 	public ArrayList<Turned> getTurnedList() {

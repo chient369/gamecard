@@ -2,21 +2,18 @@ package highcard;
 
 import common.Card;
 import common.GameInput;
-import common.GameProcess;
 import common.player.GamePlayer;
 
 public class HighCardGameProcess {
-	private GameProcess gameProcess;
 	private GamePlayer player;
 	private HighCardHandler cardHandler;
 
 	public HighCardGameProcess() {
 	}
 
-	public HighCardGameProcess(GameProcess gameProcess) {
+	public HighCardGameProcess(GamePlayer player) {
 		super();
-		this.setGameProcess(gameProcess);
-		this.player = gameProcess.getPlayer();
+		this.player = player;
 		cardHandler = new HighCardHandler();
 	}
 
@@ -25,7 +22,7 @@ public class HighCardGameProcess {
 	}
 
 	public GamePlayer getPlayer() {
-		return gameProcess.getPlayer();
+		return this.player;
 	}
 
 	public void gameProccess() {
@@ -35,7 +32,7 @@ public class HighCardGameProcess {
 		player.showPlayer();
 		while (keizoku) {
 			System.out.print("掛け金を入力してください : ");
-			int kakekin = GameInput.inputKakekin();
+			int kakekin = GameInput.inputKakekin(player);
 
 			if (kakekin == 9999) {
 				System.out.println("ゲーム終了");
@@ -44,7 +41,7 @@ public class HighCardGameProcess {
 			}
 			while (kakekin > player.getShojikin()) {
 				System.out.println("所持金以下の掛け金を入力してください　");
-				kakekin = GameInput.inputKakekin();
+				kakekin = GameInput.inputKakekin(player);
 
 			}
 
@@ -153,14 +150,6 @@ public class HighCardGameProcess {
 
 		}
 		return pitariCard;
-	}
-
-	public GameProcess getGameProcess() {
-		return gameProcess;
-	}
-
-	public void setGameProcess(GameProcess gameProcess) {
-		this.gameProcess = gameProcess;
 	}
 
 //	public static void main(String[] args) {

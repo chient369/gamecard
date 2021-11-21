@@ -30,7 +30,6 @@ public class BlackJackHandle {
 
 	public int CurrentPoint(ArrayList<Card> cardList) {
 		int currentPoint = totalPoint(cardList);
-		System.out.println("現在のポイント : " + currentPoint);
 		return currentPoint;
 	}
 
@@ -42,15 +41,18 @@ public class BlackJackHandle {
 	 */
 	public int totalPoint(ArrayList<Card> cards) {
 		int total = 0;
-		for (Card card : cards) {
-			if (isHasAce(cards)) {
-				total = isHasAcePoint(cards);
-			} else if (card.getCard_num() > 10) {
-				total += 10;
-			} else {
-				total += card.getCard_num();
-			}
 
+		if (isHasAce(cards)) {
+			total = isHasAcePoint(cards);
+		} else {
+			for (Card card : cards) {
+				if (card.getCard_num() > 10) {
+					total += 10;
+				} else {
+					total += card.getCard_num();
+				}
+
+			}
 		}
 		return total;
 
@@ -67,8 +69,7 @@ public class BlackJackHandle {
 				} else {
 					subTotal += card.getCard_num();
 				}
-			}
-			if (card.getCard_num() == 1) {
+			} else if (card.getCard_num() == 1) {
 				aceCount++;
 				if (cards.size() == 2) {
 					ace_point = 11;

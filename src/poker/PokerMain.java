@@ -1,11 +1,11 @@
 package poker;
 
 import common.GameInput;
-import common.GameProcess;
+import common.player.GamePlayer;
 
 public final class PokerMain {
-	public static void main(GameProcess gameProcess) {
-		PokerGameProcess process = new PokerGameProcess(gameProcess);
+	public static void main(GamePlayer player) {
+		PokerGameProcess process = new PokerGameProcess(player);
 		boolean loop = true;
 		System.out.println("こんにちは、ポーカーゲームをようこそ");
 		while (loop) {

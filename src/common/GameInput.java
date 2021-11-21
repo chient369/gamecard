@@ -2,17 +2,27 @@ package common;
 
 import java.util.Scanner;
 
+import common.player.GamePlayer;
+
 public class GameInput {
 	private static Scanner sc = new Scanner(System.in);
 
-	public static int inputKakekin() {
+	public static int inputKakekin(GamePlayer player) {
 		int kakekin = 0;
 		String input = sc.next();
 		boolean check = true;
 		while (check) {
 			try {
 				kakekin = Integer.parseInt(input);
-				check = false;
+				if (kakekin == 9999) {
+					break;
+				}
+				if (kakekin > player.getShojikin()) {
+					System.err.println("所持金以下の掛け金を入力してください");
+					input = sc.next();
+				} else {
+					check = false;
+				}
 				if (kakekin < 0) {
 					System.err.println("非負の掛け金を入力してください");
 					input = sc.next();
@@ -78,17 +88,16 @@ public class GameInput {
 
 	public static int inputChoose() {
 		int choose = 0;
-		String input = sc.next();
+
 		boolean check = true;
 		while (check) {
-
+			String input = sc.next();
 			try {
 				choose = Integer.parseInt(input);
 				check = false;
 
 			} catch (Exception e) {
 				System.err.println("正しく入力してください");
-				input = sc.next();
 
 			}
 		}

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import common.Card;
 
-public abstract class BlackJackDealt implements Runnable {
+public abstract class BlackJackDealt {
 	private BlackJackHandle blackJackHandle;
 
 	public BlackJackDealt() {
@@ -33,7 +33,7 @@ public abstract class BlackJackDealt implements Runnable {
 	// Ace + (10/J/Q/K) = ban-luck
 	public boolean isBanLuck(ArrayList<Card> handCards) {
 		boolean isBanLuck = false;
-		if (blackJackHandle.isHasAce(handCards)) {
+		if (blackJackHandle.isHasAce(handCards) && handCards.size() == 2) {
 			for (Card card : handCards) {
 				if (card.getCard_num() >= 10) {
 					isBanLuck = true;
@@ -46,13 +46,18 @@ public abstract class BlackJackDealt implements Runnable {
 
 	// Ace + Ace = ban-ban
 	public boolean isBanBan(ArrayList<Card> handCards) {
-		boolean isBanBan = true;
-		for (Card card : handCards) {
-			if (card.getCard_num() != 1) {
-				isBanBan = false;
+		boolean isBanBan = false;
+		if (handCards.size() == 2) {
+			if (handCards.get(0).getCard_num() == 1 && handCards.get(1).getCard_num() == 1) {
+				isBanBan = true;
 			}
 		}
 		return isBanBan;
+
+	}
+
+	public boolean isFiveDragonHands(ArrayList<Card> currentCards) {
+		return (currentCards.size() == 5 && CurrentPoint(currentCards) <= 21) ? true : false;
 
 	}
 
@@ -63,16 +68,6 @@ public abstract class BlackJackDealt implements Runnable {
 
 	public int CurrentPoint(ArrayList<Card> cardList) {
 		return blackJackHandle.CurrentPoint(cardList);
-	}
-
-	public boolean isFiveDragonHands(ArrayList<Card> currentCards) {
-		return (currentCards.size() == 5 && CurrentPoint(currentCards) <= 21) ? true : false;
-
-	}
-
-	@Override
-	public void run() {
-
 	}
 
 //	public static void main(String[] args) {

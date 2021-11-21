@@ -6,55 +6,54 @@ import BlackJack.BlackJackDealt;
 import BlackJack.BlackJackHandle;
 import common.Card;
 
-public class BlackJackDealer extends BlackJackDealt {
-
+public class BlackJackDealer extends BlackJackDealt implements Runnable {
+	private Thread dealerThread;
 	private ArrayList<Card> dealerHand;
+	private BJResult result;
 
 	public BlackJackDealer(BlackJackHandle blackJackHandle) {
 		super(blackJackHandle);
 		this.dealerHand = initHandCards();
+		this.result = null;
 	}
 
 	public ArrayList<Card> getDealerHand() {
 		return dealerHand;
 	}
 
-	@Override
-	protected ArrayList<Card> initHandCards() {
-		return BlackJackHandle.getInitialCards();
-	}
-
-<<<<<<< HEAD
-	@Override
-	protected void hitCards() {
-		Card card = super.hit();
-		dealerHand.add(card);
+	public BJResult getResult() {
+		return result;
 	}
 
 	@Override
-	protected void showHand() {
-		for (Card card : dealerHand) {
-			System.out.print(card.getCardFull() + "  ");
+	public void run() {
+		try {
+			System.out.print("俺の番、ちょっとまって.");
+			for (int i = 0; i < 5; i++) {
+				System.out.print(".");
+				Thread.sleep(400);
+			}
+			System.out.println("");
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
 
-	}
-
-=======
->>>>>>> a5a6c5de6878b4c2253fbbe17ae4bff58a08936d
-	public BJResult dealerTurn() {
-		System.out.println("It's Dealer");
-		this.showHand();
-		BJResult result = null;
 		if (super.isBanBan(dealerHand)) {
 			result = BJResult.BAN_BAN;
+			return;
 
 		} else if (super.isBanLuck(dealerHand)) {
 			result = BJResult.BAN_LUCK;
 		} else {
 			int dealerPoint = dealerOfCurrentPoint(dealerHand);
 			while (dealerPoint < 16) {
-				this.hitCards();
-				this.showHand();
+				try {
+					Thread.sleep(1000);
+					this.hitCards();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+
 				dealerPoint = dealerOfCurrentPoint(dealerHand);
 				if (dealerHand.size() == 5) {
 					result = BJResult.FIVE_DRAGON;
@@ -75,12 +74,49 @@ public class BlackJackDealer extends BlackJackDealt {
 
 			}
 		}
-		return result;
+
+	}
+
+	public void start() {
+		if (dealerThread == null) {
+			dealerThread = new Thread(this);
+			dealerThread.start();
+		}
+	}
+
+	@Override
+	protected ArrayList<Card> initHandCards() {
+		return BlackJackHandle.getInitialCards();
+	}
+
+	@Override
+	protected void hitCards() {
+		System.out.println("ボットは一枚目を引きました。");
+		Card card = super.hit();
+		dealerHand.add(card);
+	}
+
+	@Override
+	public void showHand() {
+		System.out.print("チェンボットのハンド :");
+		for (Card card : dealerHand) {
+			System.out.print(card.getCardFull() + "  ");
+		}
+		if (result != BJResult.BUSTS && result != BJResult.DEALER_OF_FREE_HAND && result != null) {
+			System.out.println(result);
+		}
+		System.out.println();
 	}
 
 	public ArrayList<Card> toGetFiveDragon(ArrayList<Card> currentCards) {
 		if (dealerOfCurrentPoint(dealerHand) < 14 && dealerHand.size() <= 5 && dealerHand.size() >= 3) {
-			this.hitCards();
+			try {
+				Thread.sleep(1000);
+				this.hitCards();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
 			toGetFiveDragon(dealerHand);
 		}
 		return dealerHand;

@@ -18,7 +18,7 @@ public final class BlackJackBonus {
 		return -fare;
 	}
 	public static int loseWithBanBan(int fare) {
-		return -fare *2;
+		return -fare *3;
 	}
 
 	public static int loseWithFiveDragon(int fare) {
