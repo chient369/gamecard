@@ -11,21 +11,13 @@ public class Game {
 	private String gameId;
 	private String roomId;
 	private Game_Status status;
-	private ArrayList<Card> gameCards;
 	private ArrayList<GameResult> result = new ArrayList<GameResult>();
 	public Game() {
 		gameInit();
 	}
 
 	private void gameInit() {
-		gameCards = new ArrayList<Card>();
-		Suit[] suits = Suit.values();
-		for (int i = 1; i <= 13; i++) {
-			for (int j = 0; j < suits.length; j++) {
-				gameCards.add(new Card(i, suits[j]));
-			}
-		}
-
+		
 	}
 
 	public String getGameId() {
@@ -42,14 +34,6 @@ public class Game {
 
 	public void setRoomId(String roomId) {
 		this.roomId = roomId;
-	}
-
-	public void setGameCards(ArrayList<Card> gameCards) {
-		this.gameCards = gameCards;
-	}
-
-	public ArrayList<Card> getGameCards() {
-		return gameCards;
 	}
 
 	public Game_Status getStatus() {

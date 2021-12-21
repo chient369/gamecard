@@ -53,7 +53,7 @@ public class GameController {
 	}
 	@PostMapping("/gameplay")
 	public ResponseEntity<Game> gamePlay(@RequestBody GamePlay gamePlay) throws GameException, TransactionException{
-		log.info("Game Play Infp : {}, {}", gamePlay.getRoomId(), gamePlay.getFareOfAmount());
+		log.info("Game Play Info : {}, {}", gamePlay.getRoomId(), gamePlay.getFareOfAmount());
 		return ResponseEntity.ok(gameService.gamePlay(gamePlay));
 	}
 

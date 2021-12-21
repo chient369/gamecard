@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.blackjack.entity.Card;
-import com.blackjack.entity.Game;
 import com.blackjack.entity.Player;
 import com.blackjack.entity.Role;
 import com.blackjack.exception.GameException;
 import com.blackjack.exception.TransactionException;
 import com.blackjack.service.Transaction;
+import com.blackjack.storage.CardStorage;
 import com.blackjack.storage.HandCardsStorage;
 
 @Component
@@ -20,11 +20,11 @@ public class GameProcess {
 	
 	@Autowired
 	GameRules gameRules;
-	@Autowired
-	private Game game;
 
+	@Autowired
+	CardStorage cardStorage;
 	public Card hitCard() {
-		ArrayList<Card> cards = game.getGameCards();
+		ArrayList<Card> cards = cardStorage.getCardStorage();
 		Random rand = new Random();
 		int cards_length = cards.size();
 		Card card = cards.get(rand.nextInt(cards_length));
@@ -69,7 +69,7 @@ public class GameProcess {
 	}
 
 	public GameResult compete(Player master, Player joiner, int fare) throws TransactionException {
-		GameResult result = new GameResult(master.getId(),joiner.getId(),fare); 
+		GameResult result = new GameResult(master,joiner,fare); 
 		BJResult masterResult = getResult(master);
 		BJResult joinerResult = getResult(joiner);
 		switch (masterResult) {

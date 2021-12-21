@@ -3,7 +3,7 @@ package com.blackjack.entity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Player {
+public class Player implements Cloneable {
 	private String name;
 	private String id;
 	private Role role;
@@ -17,6 +17,11 @@ public class Player {
 		super();
 		this.name = name;
 		this.id = id;
+	}
+	
+	public Player clone() throws CloneNotSupportedException {
+		Player clonePlayer = (Player) super.clone();
+		return clonePlayer;
 	}
 
 	public String getName() {

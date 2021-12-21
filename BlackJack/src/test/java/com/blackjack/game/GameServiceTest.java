@@ -16,6 +16,7 @@ import com.blackjack.entity.Game;
 import com.blackjack.entity.Game_Status;
 import com.blackjack.entity.Player;
 import com.blackjack.entity.Role;
+import com.blackjack.entity.Room;
 import com.blackjack.exception.GameException;
 import com.blackjack.exception.TransactionException;
 import com.blackjack.service.GameService;
@@ -38,24 +39,23 @@ public class GameServiceTest {
 
 	@Test
 	public void CreateGame() throws GameException {
-		Game game = gameService.CreateGame(player1);
-		System.out.println(game.getGameId());
-		assertThat(game.getStatus().equals(Game_Status.NEW));
+		Room room = gameService.CreateRoom(player1);
+		assertThat(room.getStatus().equals(Game_Status.NEW));
 		
 	}
 	@Test
 	public void joinGame() throws GameException {
-		Game game1 = gameService.CreateGame(player1);
-		String gameid = game1.getGameId();
-		Game game2 = gameService.joinGame(gameid, player2);
+		Room room1 = gameService.CreateRoom(player1);
+		String roomid = room1.getRoomId();
+		Room room2 = gameService.joinGame(roomid, player2);
 		
-		assertThat(game1.equals(game2));
-		assertThat(game2.getStatus().equals(Game_Status.NEW));
+		assertThat(room1.equals(room2));
+		assertThat(room2.getStatus().equals(Game_Status.NEW));
 	}
 	@Test
 	public void startGameTest() throws GameException {
 		Game_Status rs = Game_Status.IN_PROCESS;
-		Game game1 = gameService.CreateGame(player1);
+		Room game1 = gameService.CreateGame(player1);
 		String gameid = game1.getGameId();
 		Game game2 = gameService.joinGame(gameid, player2);
 		

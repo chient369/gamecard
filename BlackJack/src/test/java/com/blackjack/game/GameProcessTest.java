@@ -2,7 +2,7 @@ package com.blackjack.game;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.blackjack.entity.Card;
 import com.blackjack.entity.Game;
 import com.blackjack.entity.Player;
-import com.blackjack.entity.Role;
 import com.blackjack.entity.Suit;
 import com.blackjack.exception.GameException;
 import com.blackjack.storage.HandCardsStorage;
