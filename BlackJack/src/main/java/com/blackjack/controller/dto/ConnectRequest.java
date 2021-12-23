@@ -11,7 +11,10 @@ public class ConnectRequest {
 
 	public ConnectRequest() {
 	}
-
+	public ConnectRequest(String roomId) {
+		super();
+		this.roomId = roomId;
+	}
 	public ConnectRequest(Player player, String roomId) {
 		super();
 		this.player = player;

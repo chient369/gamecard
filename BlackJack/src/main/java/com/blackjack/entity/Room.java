@@ -1,5 +1,6 @@
 package com.blackjack.entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,19 +9,19 @@ import org.springframework.stereotype.Component;
 public class Room {
 
 	private String roomId;
-	private Map<String, Player> players;
+	private ArrayList<Player> players;
 	private Room_Status status;
 
 	public Room() {
-		players = new HashMap<String, Player>();
+		players = new ArrayList<Player>();
 	}
 
-	public Map<String, Player> getPlayers() {
+	public ArrayList<Player> getPlayers() {
 		return players;
 	}
 
-	public Player addPlayer(Player player) {
-		return players.put(player.getId(), player);
+	public void addPlayer(Player player) {
+		 players.add(player);
 	}
      
 	public String getRoomId() {

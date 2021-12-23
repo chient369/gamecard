@@ -1,7 +1,6 @@
 package com.blackjack.game;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.BeforeClass;
@@ -15,7 +14,6 @@ import com.blackjack.entity.Card;
 import com.blackjack.entity.Game;
 import com.blackjack.entity.Game_Status;
 import com.blackjack.entity.Player;
-import com.blackjack.entity.Role;
 import com.blackjack.entity.Room;
 import com.blackjack.exception.GameException;
 import com.blackjack.exception.TransactionException;
@@ -55,9 +53,9 @@ public class GameServiceTest {
 	@Test
 	public void startGameTest() throws GameException {
 		Game_Status rs = Game_Status.IN_PROCESS;
-		Room game1 = gameService.CreateGame(player1);
-		String gameid = game1.getGameId();
-		Game game2 = gameService.joinGame(gameid, player2);
+		Room room1 = gameService.CreateRoom(player1);
+		String gameid = room1.getRoomId();
+		Room room2 = gameService.joinGame(gameid, player2);
 		
 		Game start = gameService.startGame(gameid);
 		assertThat(start.equals(rs));
@@ -69,16 +67,14 @@ public class GameServiceTest {
 	}
 	@Test
 	public void gamePlayTest() throws GameException, TransactionException {
-		Game game1 = gameService.CreateGame(player1);
-		String gameid = game1.getGameId();
-		Game game2 = gameService.joinGame(gameid, player2);
+		Room room1 = gameService.CreateRoom(player1);
+		String gameid = room1.getRoomId();
+		Room room2 = gameService.joinGame(gameid, player2);
 		
 		GamePlay gamePlay = new GamePlay(100, gameid);
 		
 		Game game = gameService.gamePlay(gamePlay);
 		
-		System.out.println("winner :" + game.getWinner());
-		assertThat(game.getWinner().equals(nullValue()));
 		assertTrue(game!=null);
 		
 	}

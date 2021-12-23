@@ -1,7 +1,7 @@
 package com.blackjack.service;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Random;
 
 import org.slf4j.Logger;
@@ -36,13 +36,16 @@ public class GameService {
 	public Room CreateRoom(Player player) {
 		Room room = new Room();
 		room.addPlayer(player);
-		room.setRoomId("ROOM" + new Random().nextInt(1000));
+		room.setRoomId("" + new Random().nextInt(1000));
 		room.setStatus(Room_Status.JOINABLE);
 		player.setRole(Role.MASTER);
 		RoomStorage.getInstance().setGame(room);
 		log.info("Created game : {}", room.getRoomId());
 		return room;
 
+	}
+	public Room getRoom(String roomId) {
+		return RoomStorage.getInstance().getRooms().get(roomId);
 	}
 
 	public Room joinGame(String roomId, Player player) throws GameException {
@@ -65,12 +68,12 @@ public class GameService {
 		Game game = new Game();
 		game.setGameId("Game" + new Random().nextLong());
 		game.setRoomId(roomId);
-		Map<String, Player> players = RoomStorage.getInstance().getRooms().get(roomId).getPlayers();
+		ArrayList<Player> players = RoomStorage.getInstance().getRooms().get(roomId).getPlayers();
 
 		// Create init 2 card to start game
-		players.forEach((key, value) -> {
+		players.forEach(p -> {
 			try {
-				gameProcess.startOfCards(value);
+				gameProcess.startOfCards(p);
 			} catch (GameException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -97,13 +100,13 @@ public class GameService {
 			throw new GameException("Game is already finish");
 
 		}
-		Map<String, Player> players = RoomStorage.getInstance().getRooms().get(gamePlay.getRoomId()).getPlayers();
+		ArrayList<Player> players = RoomStorage.getInstance().getRooms().get(gamePlay.getRoomId()).getPlayers();
 		Player master = getMaster(players);
-		players.forEach((key, joiner) -> {
-			if (!joiner.getRole().equals(Role.MASTER)) {
+		players.forEach(p -> {
+			if (!p.getRole().equals(Role.MASTER)) {
 				GameResult competeResult;
 				try {
-					competeResult = gameProcess.compete(master, joiner, gamePlay.getFareOfAmount());
+					competeResult = gameProcess.compete(master, p, gamePlay.getFareOfAmount());
 					game.getResult().add(competeResult);
 				} catch (TransactionException e) {
 					// TODO Auto-generated catch block
@@ -117,9 +120,9 @@ public class GameService {
 		return game;
 	}
 
-	private Player getMaster(Map<String, Player> players) {
+	private Player getMaster(ArrayList<Player> players) {
 		Player mst = null;
-		Iterator<Player> it = players.values().iterator();
+		Iterator<Player> it = players.iterator();
 		while (it.hasNext()) {
 			Player player = (Player) it.next();
 			if (player.getRole().equals(Role.MASTER)) {
