@@ -16,7 +16,8 @@ $('.exit-btn').click(function () {
 })
 
 //click btn create of process
-function displayInfo(data, id) {
+function displayInfo(data) {
+	
     var players = data.players;
     let roomId = data.roomId;
     let playerAmount = players.length;

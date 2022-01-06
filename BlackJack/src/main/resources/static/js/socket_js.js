@@ -1,27 +1,22 @@
 const url = 'http://localhost:8090';
 let stompClient;
-let roomId;
-let playerType;
+var roomId;
 
 
-function response(response){
-			alert("hahaha");
-			let data = JSON.parse(response.body);
-			console.log('respone of socket : ' + data);
-			displayInfo(data)
-		}
 
-function connectToSocket(roomId) {
+function connectToSocket(rommId) {
+
 	console.log("connecting to the room");
-	let socket = new SockJS("/gameplay");
+	let socket = new SockJS(url + "/gameplay");
 	stompClient = Stomp.over(socket);
-	stompClient.connect({}, function() {
-		var url = "/topic-progress/";
-		stompClient.subscribe(url,response)
-		stompClient.send("/app/api/displayRespone",
-			{},
-			JSON.stringify({ roomId: roomId})
-		)
+	stompClient.connect({}, function(frame) {
+		console.log("connected to the frame: " + frame);
+		stompClient.subscribe("/topic/game-progress/" + rommId, function(response) {
+			let data = JSON.parse(response.body);
+			displayInfo(data);
+			console.log(data);
+			alert("Created")
+		})
 	})
 }
 
@@ -60,7 +55,7 @@ function connectToGame() {
 		alert("Please enter room ID");
 	} else {
 		$.ajax({
-			url: url + "/api/connect",
+			url: url + "/api/connect-room",
 			type: 'POST',
 			dataType: "json",
 			contentType: "application/json",
@@ -82,22 +77,4 @@ function connectToGame() {
 			}
 		})
 	}
-}
-
-function dp(roomId) {
-	$.ajax({
-		url: url + "/api/displayRespone",
-		type: 'POST',
-		dataType: "json",
-		contentType: "application/json",
-		data: JSON.stringify({
-			"roomId": roomId
-		}),
-		success: function(data) {
-			console.log(data);
-		},
-		error: function(error) {
-			console.log(error);
-		}
-	})
 }
