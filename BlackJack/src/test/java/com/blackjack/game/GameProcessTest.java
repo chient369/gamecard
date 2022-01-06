@@ -13,12 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.blackjack.entity.Card;
-import com.blackjack.entity.Game;
-import com.blackjack.entity.Player;
-import com.blackjack.entity.Suit;
+import com.blackjack.entity.card.Card;
+import com.blackjack.entity.card.Suit;
+import com.blackjack.entity.game.Game;
+import com.blackjack.entity.game.HandCardsStorage;
+import com.blackjack.entity.player.Player;
 import com.blackjack.exception.GameException;
-import com.blackjack.storage.HandCardsStorage;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

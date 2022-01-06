@@ -1,9 +1,7 @@
-package com.blackjack.storage;
+package com.blackjack.entity.game;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.blackjack.entity.Game;
 
 public class GameStorage {
 	private Map<String, Game> games;

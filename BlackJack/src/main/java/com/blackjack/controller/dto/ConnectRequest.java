@@ -2,7 +2,7 @@ package com.blackjack.controller.dto;
 
 import org.springframework.stereotype.Component;
 
-import com.blackjack.entity.Player;
+import com.blackjack.entity.player.Player;
 
 @Component
 public class ConnectRequest {

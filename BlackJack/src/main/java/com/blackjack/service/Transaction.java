@@ -1,6 +1,6 @@
 package com.blackjack.service;
 
-import com.blackjack.entity.Player;
+import com.blackjack.entity.player.Player;
 import com.blackjack.exception.TransactionException;
 
 public final class Transaction {

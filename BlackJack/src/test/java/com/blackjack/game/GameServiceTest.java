@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.blackjack.entity.Card;
-import com.blackjack.entity.Game;
-import com.blackjack.entity.Game_Status;
-import com.blackjack.entity.Player;
-import com.blackjack.entity.Room;
+import com.blackjack.entity.card.Card;
+import com.blackjack.entity.game.Game;
+import com.blackjack.entity.game.Game_Status;
+import com.blackjack.entity.player.Player;
+import com.blackjack.entity.room.Room;
 import com.blackjack.exception.GameException;
 import com.blackjack.exception.TransactionException;
 import com.blackjack.service.GameService;

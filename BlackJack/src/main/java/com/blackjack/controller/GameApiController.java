@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.blackjack.controller.dto.ConnectRequest;
 import com.blackjack.controller.dto.GameDto;
-import com.blackjack.entity.Card;
-import com.blackjack.entity.Game;
-import com.blackjack.entity.Player;
-import com.blackjack.entity.Room;
+import com.blackjack.entity.card.Card;
+import com.blackjack.entity.game.Game;
+import com.blackjack.entity.player.Player;
+import com.blackjack.entity.player.PlayerStorage;
+import com.blackjack.entity.room.Room;
 import com.blackjack.exception.GameException;
 import com.blackjack.exception.TransactionException;
 import com.blackjack.game.GamePlay;
@@ -31,18 +32,19 @@ public class GameApiController {
 	private  SimpMessagingTemplate simpMessagingTemplate;
 	
 	@PostMapping("/create-room")
-	public Room createRoom(@RequestBody Player player) {
-		log.info("Create new game : {} " + player);
+	public Room createRoom(@RequestBody Player playerDto) {
+		log.info("Create new game : {} " + playerDto.getPlayerId());
+		Player player = PlayerStorage.getInstance().getPlayer(playerDto.getPlayerId());
 		return gameService.CreateRoom(player);
 	}
 
 	@PostMapping("/connect-room")
 	public Room connectRoom(@RequestBody ConnectRequest request) throws GameException {
-		log.info("gameId : " + request.getRoomId() + "Player : " + request.getPlayer().getName());
-		log.info("{} was connected to : {}", request.getPlayer().getName(), request.getRoomId());
-		Room room = gameService.getRoom(request.getRoomId());
+		Player player = PlayerStorage.getInstance().getPlayer(request.getPlayer().getPlayerId());
+		log.info("{} connected to : {}", player.getUserName(), request.getRoomId());
+		Room room = gameService.joinGame(request.getRoomId(), player);
 		simpMessagingTemplate.convertAndSend("/topic/game-progress/" + room.getRoomId(), room);
-		return gameService.joinGame(request.getRoomId(), request.getPlayer());
+		return room;
 	}
 
 	@PostMapping("/start")
@@ -54,8 +56,8 @@ public class GameApiController {
 
 	@PostMapping("/hit")
 	public ResponseEntity<Card> hitCard(@RequestBody Player player) {
-		log.info("{} was hitted card", player.getName());
-		return ResponseEntity.ok(gameService.hitCard(player.getId()));
+		log.info("{} was hitted card", player.getUserName());
+		return ResponseEntity.ok(gameService.hitCard(player.getPlayerId()));
 
 	}
 
@@ -64,7 +66,7 @@ public class GameApiController {
 		log.info("Game Play Info : {}, {}", gamePlay.getRoomId(), gamePlay.getFareOfAmount());
 		return ResponseEntity.ok(gameService.gamePlay(gamePlay));
 	}
-	@PostMapping("/displayRespone")
+	@PostMapping("/game-process")
 	public ResponseEntity<Room> responeseConnect(@RequestBody ConnectRequest request) throws GameException {
 		log.info("roomId: {}", request.getRoomId());
 		Room room = gameService.getRoom(request.getRoomId());

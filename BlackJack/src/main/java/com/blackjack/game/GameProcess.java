@@ -6,14 +6,14 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.blackjack.entity.Card;
-import com.blackjack.entity.Player;
-import com.blackjack.entity.Role;
+import com.blackjack.entity.card.Card;
+import com.blackjack.entity.card.CardStorage;
+import com.blackjack.entity.game.HandCardsStorage;
+import com.blackjack.entity.player.Player;
+import com.blackjack.entity.player.Role;
 import com.blackjack.exception.GameException;
 import com.blackjack.exception.TransactionException;
 import com.blackjack.service.Transaction;
-import com.blackjack.storage.CardStorage;
-import com.blackjack.storage.HandCardsStorage;
 
 @Component
 public class GameProcess {
@@ -42,11 +42,11 @@ public class GameProcess {
 		ArrayList<Card> handCards = new ArrayList<Card>();
 		handCards.add(hitCard());
 		handCards.add(hitCard());
-		HandCardsStorage.getInstance().addHandCard(player.getId(), handCards);
+		HandCardsStorage.getInstance().addHandCard(player.getPlayerId(), handCards);
 	}
 
 	public  BJResult getResult(Player player) {
-		ArrayList<Card> cards = HandCardsStorage.getInstance().getHandCards(player.getId());
+		ArrayList<Card> cards = HandCardsStorage.getInstance().getHandCards(player.getPlayerId());
 		BJResult result = null;
 		if (GameRules.isBanBan(cards)) {
 			result = BJResult.BAN_BAN;

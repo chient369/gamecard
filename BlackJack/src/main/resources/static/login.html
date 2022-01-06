@@ -160,7 +160,7 @@ xmlns:th="http://www.thymeleaf.org">
                 </div>
                 <p class="val-mess" hidden>Confirm password dosen't match</p>
                 <div>
-                    <input type="submit" value="SUBMIT" id="sbmt-sgup" class = "btn">
+                    <input type="submit" value="SUBMIT" id="sbmt-sgup" dis class = "btn">
                 </div>
 
             </form>
@@ -203,10 +203,10 @@ xmlns:th="http://www.thymeleaf.org">
         var confirmValue = confirmInput.value;
         if (passValue !== confirmValue) {
             $('.val-mess').show();
-            $('#sbmt-sgup').attr('disabled', true);
+            $('#sbmt-sgup').attr('disable', true);
         } else {
         	$('.val-mess').hide();
-        	 $('#sbmt-sgup').attr('disabled', false);
+        	 $('#sbmt-sgup').attr('disable', false);
         }
 
     }

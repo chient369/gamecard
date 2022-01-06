@@ -1,10 +1,10 @@
-package com.blackjack.storage;
+package com.blackjack.entity.game;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.blackjack.entity.Card;
+import com.blackjack.entity.card.Card;
 import com.blackjack.exception.GameException;
 
 public class HandCardsStorage {

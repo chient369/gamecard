@@ -1,10 +1,10 @@
-package com.blackjack.entity;
+package com.blackjack.entity.room;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.stereotype.Component;
+
+import com.blackjack.entity.player.Player;
 @Component
 public class Room {
 

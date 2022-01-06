@@ -40,8 +40,8 @@ xmlns:th="http://www.thymeleaf.org">
 				<li class="header-info_item">
 					<div class="wallet-img"></div>
 					<div class="wallet-amount" id="pwallet" th:text ="${player.wallet}"></div>
-				<div th:text ="${id}" hidden id="playerId"></div>
 				</li>
+				<li th:text = "${player.playerId}" hidden></li>
 			</ul>
 		</div>
 		<div class="menu none-back" id="menu-content" style="display: none;">
@@ -125,7 +125,7 @@ xmlns:th="http://www.thymeleaf.org">
 		<div class="player player_1">
 			<div class="player_info player_info-1">
 				<div class="player_dealer-symbol dealer-1 " hidden></div>
-				<p th:text ="${player.userName}">name1</p>
+				<p>name1</p>
 				<div class="player_info_wallet">
 					<div class="player_info_wallet-img"></div>
 					<p class="player_info_wallet-amount">1000$</p>

@@ -9,21 +9,21 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.blackjack.entity.Card;
-import com.blackjack.entity.Game;
-import com.blackjack.entity.Game_Status;
-import com.blackjack.entity.Player;
-import com.blackjack.entity.Role;
-import com.blackjack.entity.Room;
-import com.blackjack.entity.Room_Status;
+import com.blackjack.entity.card.Card;
+import com.blackjack.entity.game.Game;
+import com.blackjack.entity.game.GameStorage;
+import com.blackjack.entity.game.Game_Status;
+import com.blackjack.entity.game.HandCardsStorage;
+import com.blackjack.entity.player.Player;
+import com.blackjack.entity.player.Role;
+import com.blackjack.entity.room.Room;
+import com.blackjack.entity.room.RoomStorage;
+import com.blackjack.entity.room.Room_Status;
 import com.blackjack.exception.GameException;
 import com.blackjack.exception.TransactionException;
 import com.blackjack.game.GamePlay;
 import com.blackjack.game.GameProcess;
 import com.blackjack.game.GameResult;
-import com.blackjack.storage.GameStorage;
-import com.blackjack.storage.HandCardsStorage;
-import com.blackjack.storage.RoomStorage;
 
 @Service
 public class GameService {
@@ -39,8 +39,7 @@ public class GameService {
 		room.setRoomId("" + new Random().nextInt(1000));
 		room.setStatus(Room_Status.JOINABLE);
 		player.setRole(Role.MASTER);
-		RoomStorage.getInstance().setGame(room);
-		log.info("Created game : {}", room.getRoomId());
+		RoomStorage.getInstance().setRoom(room);
 		return room;
 
 	}
@@ -57,9 +56,12 @@ public class GameService {
 		if (room.getStatus() == Room_Status.FULL) {
 			throw new GameException("Room is full");
 		}
+		if (room.getPlayers().size() == 4) {
+			room.setStatus(Room_Status.FULL);
+		}
 		player.setRole(Role.JOINER);
 		room.addPlayer(player);
-		RoomStorage.getInstance().setGame(room);
+		RoomStorage.getInstance().setRoom(room);
 
 		return room;
 	}

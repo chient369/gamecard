@@ -1,9 +1,7 @@
-package com.blackjack.storage;
+package com.blackjack.entity.room;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.blackjack.entity.Room;
 
 public class RoomStorage {
 	private Map<String, Room> rooms;
@@ -24,7 +22,7 @@ public class RoomStorage {
 		return rooms;
 	}
 
-	public void setGame(Room room) {
+	public void setRoom(Room room) {
 		rooms.put(room.getRoomId(), room);
 	}
 	public boolean isExist(String id) {

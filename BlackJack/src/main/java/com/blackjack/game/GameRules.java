@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Component;
 
-import com.blackjack.entity.Card;
+import com.blackjack.entity.card.Card;
 @Component
 public final class GameRules {
 	public static boolean isBanLuck(ArrayList<Card> cards) {

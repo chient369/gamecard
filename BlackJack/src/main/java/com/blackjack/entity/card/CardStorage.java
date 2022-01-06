@@ -1,11 +1,8 @@
-package com.blackjack.storage;
+package com.blackjack.entity.card;
 
 import java.util.ArrayList;
 
 import org.springframework.stereotype.Component;
-
-import com.blackjack.entity.Card;
-import com.blackjack.entity.Suit;
 
 @Component
 public class CardStorage {
