@@ -9,17 +9,18 @@ import com.blackjack.entity.user.User;
 @Component
 public class Player extends User {
 	private String playerId;
-	private Role role;
+	private GameRole gameRole;
 
 	public Player() {
 		super();
-		
+
 	}
 
 	public Player(String userName, String password) {
 		super(userName, password);
 		this.playerId = UUID.randomUUID().toString();
 	}
+
 	public String getPlayerId() {
 		return playerId;
 	}
@@ -28,20 +29,14 @@ public class Player extends User {
 		this.playerId = playerId;
 	}
 
-	public Role getRole() {
-		return role;
+	public GameRole getGameRole() {
+		return gameRole;
 	}
 
-	public void setRole(Role role) {
-		this.role = role;
+	public void setGameRole(GameRole gameRole) {
+		this.gameRole = gameRole;
 	}
 
-	@Override
-	public String toString() {
-		return "Player [playerId=" + playerId + ", role=" + role + ", userName=" + userName + ", wallet=" + wallet
-				+ "]";
-	}
-	
 	
 
 }

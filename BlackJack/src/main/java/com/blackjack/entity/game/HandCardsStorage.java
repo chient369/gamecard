@@ -33,6 +33,10 @@ public class HandCardsStorage {
 			cardStorage.clear();
 		}
 	}
+	public Map<String, ArrayList<Card>> getCardStorage() {
+		return cardStorage;
+	}
+	
 	
 	
 

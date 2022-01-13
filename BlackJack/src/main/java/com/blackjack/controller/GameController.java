@@ -22,20 +22,15 @@ public class GameController {
 	private Logger log = LoggerFactory.getLogger(GameController.class);
 	
 	
-	@GetMapping("/")
-	public String index(Model model) {
+	@GetMapping(value = { "/"})
+	public String login(Model model) {
 		model.addAttribute("user", new User());
 		return "login";
 	}
 	@PostMapping("/login")
 	public String login(@ModelAttribute User user, Model model) {
-		User userValidate = userService.getUser(user.getUserName(), user.getPassword());
-		if (userValidate == null) {
-			return "login";
-		}
 		Player player = new Player(user.getUserName(), user.getPassword());
 		PlayerStorage.getInstance().addPlayer(player);
-		System.out.println(PlayerStorage.getInstance().getPlayers().size());
 		model.addAttribute("player", player);
 		model.addAttribute("id", player.getPlayerId());
 		return "index";

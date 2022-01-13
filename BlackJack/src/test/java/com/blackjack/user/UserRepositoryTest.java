@@ -11,7 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
 import com.blackjack.entity.user.User;
-import com.blackjack.entity.user.UserRespository;
+import com.blackjack.entity.user.UserRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -19,7 +19,7 @@ import com.blackjack.entity.user.UserRespository;
 public class UserRepositoryTest {
 
 	@Autowired
-	private UserRespository repo;
+	private UserRepository repo;
 	
 	@Autowired
 	private TestEntityManager entityManager;
@@ -28,7 +28,7 @@ public class UserRepositoryTest {
 	public void testCreateUser() {
 		User user = new User("ctanaka", "111111");
 		User usersaved = repo.save(user);
-		assertThat(user.getIndex() == usersaved.getIndex());
+		assertThat(user.getId() == usersaved.getId());
 	}
 //	@Test
 //	public void testGetUser() {

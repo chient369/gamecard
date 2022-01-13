@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +22,7 @@ import com.blackjack.exception.GameException;
 import com.blackjack.exception.TransactionException;
 import com.blackjack.game.GamePlay;
 import com.blackjack.service.GameService;
-	
+
 @RestController
 @RequestMapping("/api")
 public class GameApiController {
@@ -29,13 +30,16 @@ public class GameApiController {
 	@Autowired
 	private GameService gameService;
 	@Autowired
-	private  SimpMessagingTemplate simpMessagingTemplate;
+	private SimpMessagingTemplate simpMessagingTemplate;
 	
+	
+
 	@PostMapping("/create-room")
-	public Room createRoom(@RequestBody Player playerDto) {
+	public ResponseEntity<Room> createRoom( @RequestBody Player playerDto) {
 		log.info("Create new game : {} " + playerDto.getPlayerId());
 		Player player = PlayerStorage.getInstance().getPlayer(playerDto.getPlayerId());
-		return gameService.CreateRoom(player);
+		return ResponseEntity.ok(gameService.CreateRoom(player));
+		
 	}
 
 	@PostMapping("/connect-room")
@@ -50,7 +54,9 @@ public class GameApiController {
 	@PostMapping("/start")
 	public ResponseEntity<Game> start(@RequestBody GameDto request) throws GameException {
 		log.info("game started : {}", request.getRoomId());
-		return ResponseEntity.ok(gameService.startGame(request.getRoomId()));
+		Game game = gameService.startGame(request.getRoomId());
+		simpMessagingTemplate.convertAndSend("/topic/game-progress/" + game.getRoomId(), game);
+		return ResponseEntity.ok(game);
 
 	}
 
@@ -66,6 +72,7 @@ public class GameApiController {
 		log.info("Game Play Info : {}, {}", gamePlay.getRoomId(), gamePlay.getFareOfAmount());
 		return ResponseEntity.ok(gameService.gamePlay(gamePlay));
 	}
+
 	@PostMapping("/game-process")
 	public ResponseEntity<Room> responeseConnect(@RequestBody ConnectRequest request) throws GameException {
 		log.info("roomId: {}", request.getRoomId());
@@ -73,7 +80,5 @@ public class GameApiController {
 		simpMessagingTemplate.convertAndSend("/topic/game-progress/" + room.getRoomId(), room);
 		return ResponseEntity.ok(room);
 	}
-	
-	
-	
+
 }

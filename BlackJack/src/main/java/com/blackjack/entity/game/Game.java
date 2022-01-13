@@ -1,9 +1,11 @@
 package com.blackjack.entity.game;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+import com.blackjack.entity.card.Card;
 import com.blackjack.game.GameResult;
 
 @Component
@@ -11,14 +13,12 @@ public class Game {
 	private String gameId;
 	private String roomId;
 	private Game_Status status;
-	private ArrayList<GameResult> result = new ArrayList<GameResult>();
+	private Map<String, ArrayList<Card>> playersCards ;
+	private ArrayList<GameResult> result ;
 	public Game() {
-		gameInit();
+		result =  new ArrayList<GameResult>();
 	}
 
-	private void gameInit() {
-		
-	}
 
 	public String getGameId() {
 		return gameId;
@@ -51,6 +51,17 @@ public class Game {
 	public void setResult(ArrayList<GameResult> result) {
 		this.result = result;
 	}
+	
+	public Map<String, ArrayList<Card>> getPlayersCards() {
+		return playersCards;
+	}
+
+
+	public void setPlayersCards(Map<String, ArrayList<Card>> playersCards) {
+		this.playersCards = playersCards;
+	}
+	
+
 
 	
 

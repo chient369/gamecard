@@ -1,11 +1,11 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: fantasy;
-
 }
-.container{
+
+.container {
     position: relative;
     width: 1024px;
     margin: auto;
@@ -13,82 +13,89 @@
     flex-direction: column;
     background-color: antiquewhite;
     padding-bottom: 50px;
-    
 }
-.header{
-  margin-bottom: 80px;
-    background-color: rgb(214, 190, 190);
 
+.header {
+    margin-bottom: 80px;
+    background-color: rgb(214, 190, 190);
 }
-.header_logo{
+
+.header_logo {
     position: absolute;
     display: flex;
     top: 3%;
-   
 }
-.header-menu i{
-position: absolute;
-right: 6px;
-font-size: 40px;
-top: 3px;
-border: 2px solid #999;
-padding: 2px;
 
+.header-menu i {
+    position: absolute;
+    right: 6px;
+    font-size: 40px;
+    top: 3px;
+    border: 2px solid #999;
+    padding: 2px;
 }
-.header-menu:hover{
+
+.header-menu:hover {
     cursor: pointer;
 }
-.menu-btn{
-    padding: 0;
 
+.menu-btn {
+    padding: 0;
 }
-.header_logo-img{
+
+.header_logo-img {
     width: 100px;
     height: 100px;
     background-image: url("../image/logo.png");
     background-size: cover;
 }
-.header_logo-title span{
+
+.header_logo-title span {
     display: block;
     font-size: 38px;
     margin-top: 35px;
-    
 }
-.header-info{
+
+.header-info {
     display: flex;
     justify-content: space-evenly;
     padding: 10px 0;
+}
 
+.header-info_item {
+    font-size: 20px;
+    color: #333;
+    list-style: none;
 }
-.header-info_item{
-font-size: 20px;
-color: #333;
-list-style: none;
-}
-li:last-child{
+
+li:last-child {
     display: flex;
 }
-.wallet-img{
+
+.wallet-img {
     width: 30px;
     height: 30px;
     background-image: url("../image/chip.png");
     background-size: cover;
     margin: 2px 4px;
-
 }
-.wallet-amount{
 
-line-height: 1.6;
+.wallet-amount {
+    line-height: 1.6;
 }
+
+
 /*----------table css--------*/
-.table{
+
+.table {
     margin-top: 20px;
     margin-bottom: 60px;
     position: relative;
 }
-.table-background{
+
+.table-background {
     position: relative;
-    width:600px ;
+    width: 600px;
     height: 300px;
     background-image: url("../image/table_background.jpg");
     background-repeat: no-repeat;
@@ -99,7 +106,8 @@ line-height: 1.6;
     border-radius: 100px;
     box-shadow: 5px 5px 5px rgb(221, 207, 207);
 }
-.table-background-logo{
+
+.table-background-logo {
     position: absolute;
     top: 20px;
     left: 120px;
@@ -109,17 +117,23 @@ line-height: 1.6;
     background-size: cover;
     z-index: 1;
 }
-.table-hand_cards{
+
+.table-hand_cards {
     display: flex;
     justify-content: center;
     margin-top: 19%;
+    visibility: hidden;
 }
+
+
 /*card options
 */
-card-t img{
+
+card-t img {
     height: 70px;
-    }
-.table_playing_card-img{
+}
+
+.table_playing_card-img {
     position: absolute;
     width: 57px;
     height: 80px;
@@ -130,11 +144,12 @@ card-t img{
     border-radius: 2px;
     /* box-shadow: 1px 1px 1px rgba(105, 103, 103, 0.8); */
 }
-.player{
-position: relative;
+
+.player {
+    position: relative;
     width: 80px;
     height: 80px;
-    background-image: url("../image/theme_1.jpg") ;
+    background-image: url("../image/theme_1.jpg");
     background-size: cover;
     z-index: 1;
     border-radius: 50%;
@@ -145,28 +160,28 @@ position: relative;
     font-size: 23px;
 }
 
-.player_1{
+.player_1 {
     margin-left: 46%;
 }
 
-
-.player_3{
+.player_3 {
     position: absolute;
     top: 35%;
     left: -17%;
-
 }
-.player_2{
+
+.player_2 {
     margin-left: 46%;
     margin-top: -5%;
-
 }
-.player_4{
+
+.player_4 {
     position: absolute;
     top: 35%;
     right: -17%;
 }
-.player_dealer-symbol{
+
+.player_dealer-symbol {
     position: absolute;
     background-size: cover;
     width: 30px;
@@ -174,77 +189,89 @@ position: relative;
     transform: rotate(50deg);
     background-image: url("../image/dealer_symbol.png");
 }
-.dealer-1, .dealer-2{
+
+.dealer-1,
+.dealer-2 {
     top: -47%;
     right: 71%;
 }
 
-.dealer-3, .dealer-4{
+.dealer-3,
+.dealer-4 {
     top: -153%;
     right: -12%;
 }
 
-.player_info{
+.player_info {
     position: absolute;
-    
     font-size: 18px;
 }
-    .player_info_wallet-img{
-        width: 28px;
-        height: 28px;
-        background-image: url("../image/chip.png");
-        background-size: cover;
-        margin: 4px 10px  0 0;
-    }
-    .player_info_wallet{
-        display: flex;
-    }
-    .player_info_wallet-amount{
-        font-size: 18px;
-        
-        line-height: 1.6;
-    
-    }
-    .player_info-1{
-        right: -100%;
-        top: 25%;
-    }
-    .player_info-3{
-        top: 100%;
-    }
-    .player_info-2{
-        right: -100%;
-        top: 25%;
-    }
-    .player_info-4{
-        top: 100%;
-    }
 
-.bet_amount{
+.player_info_wallet-img {
+    width: 28px;
+    height: 28px;
+    background-image: url("../image/chip.png");
+    background-size: cover;
+    margin: 4px 10px 0 0;
+}
+
+.player_info_wallet {
+    display: flex;
+}
+
+.player_info_wallet-amount {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.player_info-1 {
+    right: -100%;
+    top: 25%;
+}
+
+.player_info-3 {
+    top: 100%;
+}
+
+.player_info-2 {
+    right: -100%;
+    top: 25%;
+}
+
+.player_info-4 {
+    top: 100%;
+}
+
+.bet_amount {
     position: absolute;
     color: rgba(24, 20, 20, 0.829);
 }
-.bet_amount-1{
+
+.bet_amount-1 {
     top: -51%;
     left: 10%;
 }
-.bet_amount-2{
+
+.bet_amount-2 {
     top: 33%;
     left: 133%;
 }
 
-.bet_amount-3{
+.bet_amount-3 {
     bottom: -70%;
     left: 18%
 }
-.bet_amount-4{
+
+.bet_amount-4 {
     top: 32%;
     left: -100%;
 }
-.hidden{
+
+.hidden {
     display: none;
 }
-.btn{
+
+.btn {
     padding: 10px;
     border-radius: 12px;
     border: 1px solid #999;
@@ -252,53 +279,56 @@ position: relative;
     background-color: #4d79ff;
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
-    color:  #f2f2f2;
+    color: #f2f2f2;
     width: 200px;
     text-align: center;
+}
 
-}
-.btn:hover{
+.btn:hover {
     cursor: pointer;
-    color:  #dbcaca;
+    color: #dbcaca;
 }
-.none_back{
+
+
+/* .none_back {
     position: absolute;
-    background-color: rgba(201, 189, 189,0.4);
+    background-color: rgba(201, 189, 189, 0.4);
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     z-index: 1;
-}
-.menu{
+} */
+
+.menu {
     position: absolute;
     display: flex;
     right: 30%;
-    top: 45%;
+    top: 42%;
     z-index: 1;
     border-radius: 20px;
     box-shadow: 1px 1px 2px #474545;
-    width: 400px; 
-    background-color: rgb(216, 208, 208);  
+    width: 400px;
+    background-color: rgb(216, 208, 208);
     padding: 20px 0;
 }
 
-.menu_btn{
-    margin: auto; 
+.menu_btn {
+    margin: auto;
     display: flex;
-    flex-direction: column;  
-   
+    flex-direction: column;
 }
-#create_room{
+
+#create_room {
     position: absolute;
     top: 97px;
     right: 161px;
-
 }
-.create_game-btn{
-margin-bottom: 6px;
 
+.create_game-btn {
+    margin-bottom: 6px;
 }
+
 .create_form-btn {
     margin-top: 4px;
     padding: 9px;
@@ -311,89 +341,104 @@ margin-bottom: 6px;
     color: #f2f2f2;
     text-align: center;
 }
-.exit-btn{
+
+.exit-btn {
     margin-top: 6px;
-}     
-#menu_connect_game_form{
+}
+
+#menu_connect_game_form {
     display: none;
     position: absolute;
     text-align: center;
     top: 92px;
     left: 206px;
     z-index: 1;
-    
 }
 
- input[type=text]{
-    padding: 8px; 
+input[type=text] {
+    padding: 8px;
     border-radius: 6px;
 }
+
 .menu_connect_game-btn {
-   background-color: transparent; 
-   font-size: 30px;
-   color: #4d79ff;
-   border: none; 
-   margin-top: 2px;
-   
+    background-color: transparent;
+    font-size: 30px;
+    color: #4d79ff;
+    border: none;
+    margin-top: 2px;
 }
-.menu_connect_game-btn i:hover{
+
+.menu_connect_game-btn i:hover {
     cursor: pointer;
     color: #577cec;
 }
 
 
-
 /*----------game control -start--------*/
-.game_control{
+
+.game_control {
     display: flex;
     justify-content: center;
     margin-top: 20%;
 }
-.control-btn{
+
+.control-btn {
     padding: 4px 10px;
     background-color: #4d79ff;
     border-radius: 4px;
     border: none;
-    font-weight:500 ;
+    font-weight: 500;
     margin-right: 4px;
     box-shadow: 2px 2px 2px #0e0d0d;
     font-family: Arial, Helvetica, sans-serif;
-
 }
-.control-btn:hover{
-    color:rgb(216, 208, 208);
+
+.control-btn:hover {
+    color: rgb(216, 208, 208);
     cursor: pointer;
 }
+
+
 /* ----------bet_form__________*/
-.joiner_opera{
+
+.joiner_opera {
     position: absolute;
     top: 38%;
-    right: 33%; 
+    right: 32%;
+}
 
+.joiner_opera input {
+    margin-bottom: 10px;
 }
-.joiner_opera input{
-    margin-top: 10px;   
+
+#bet-btn {
+    margin-left: 56px;
 }
-.joiner_opera input[type=number]{
+
+.joiner_opera input[type=number] {
     display: block;
     border: none;
+    border-radius: 3px;
     box-shadow: 2px 2px 2px #0e0d0d;
     text-align: center;
     font-family: sans-serif;
 }
-input[type="number"]::-webkit-outer-spin-button, 
-input[type="number"]::-webkit-inner-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
-} 
-input[type="number"]:focus{
-    border: none;
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
-.joiner_opera input[type=submit]{
+
+input[type="number"]:focus {
+    border: none;
+}
+
+.joiner_opera input[type=submit] {
     margin: auto;
     margin-top: 6px;
     margin-left: 29px;
-
 }
+
+
 /* ----------bet_form_end_________*/

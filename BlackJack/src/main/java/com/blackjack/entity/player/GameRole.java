@@ -1,5 +1,5 @@
 package com.blackjack.entity.player;
 
-public enum Role {
+public enum GameRole {
 	MASTER, JOINER
 }

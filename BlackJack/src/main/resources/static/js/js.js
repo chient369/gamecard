@@ -1,25 +1,38 @@
 'use strict';
-$(document).ready(function () {
-    setTimeout(function () {
+$(document).ready(function() {
+    setTimeout(function() {
         $('.table-background-logo').fadeOut()
         $('#menu-content').fadeIn();
     }, 1000);
 });
 
 //menu js
-$('#menu-btn').click(function () {
-    $('#menu-content').toggle();
-})
-//exit btn
-$('.exit-btn').click(function () {
+$('#menu-btn').click(function() {
+        $('#menu-content').toggle();
+    })
+    //exit btn
+$('.exit-btn').click(function() {
+        $('#menu-content').hide();
+    })
+    //join game of form 
+
+$('.join_game-btn').click(function() {
     $('#menu-content').hide();
+    $('#menu_connect_game_form').show();
 })
 
+$('#join_back-btn').click(function() {
+    $('#menu_connect_game_form').hide();
+    $('#menu-content').show();
+})
+
+
+var roomId;
+const id = document.querySelector('#playerId').innerHTML
 
 function displayInfo(data) {
-    var id = document.querySelector('#playerId').innerHTML;
     var players = data.players;
-    let roomId = data.roomId;
+    roomId = data.roomId;
     let playerAmount = players.length;
     let yourIndex = 0;
     for (let i = 0; i < playerAmount; i++) {
@@ -44,8 +57,9 @@ function displayInfo(data) {
         }
     }
 }
+
 function displayCurrentPlayer(player, roomId, index) {
-    let role = player.role;
+    let role = player.gameRole;
     let idElement = document.querySelector('#rid');
     $('.header-info_item:first').show();
     idElement.innerText = 'ROOM' + roomId;
@@ -63,9 +77,10 @@ function displayCurrentPlayer(player, roomId, index) {
 
     $('#menu-content').hide();
 }
+
 function displayRoom(player, index) {
-    
-    let role = player.role;
+
+    let role = player.gameRole;
     let pInfoNode = '.player_info-' + (index + 1);
 
     let pInfo = document.querySelector(pInfoNode);
@@ -86,22 +101,34 @@ function displayRoom(player, index) {
     role = '';
 }
 
+function bet() {
+    var betAmount = document.querySelector('#bet-input').value;
+    $('.bet_amount-1').html(betAmount + '$');
+    $('.bet_amount-1').show();
+    $('#bet-input').hide();
+    $('#bet-btn').hide();
+
+}
+
+function startGame() {
+    $('.master_opera').hide();
+    $.ajax({
+        url: url + '/api/start',
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({
+            'roomId': roomId
+        }),
+        success: function(data) {
+            console.log(data)
+            var cards = data.playersCards;
+            console.log(cards[id]);
+        },
+        error: function(error) {
+            console.log(error);
+        }
 
 
-
-
-
-//join game of form 
-
-$('.join_game-btn').click(function () {
-    $('#menu-content').hide();
-    $('#menu_connect_game_form').show();
-})
-
-$('#join_back-btn').click(function () {
-    $('#menu_connect_game_form').hide();
-    $('#menu-content').show();
-})
-
-
-
+    })
+}

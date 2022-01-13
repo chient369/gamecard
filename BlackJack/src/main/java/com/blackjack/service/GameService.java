@@ -3,6 +3,7 @@ package com.blackjack.service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,8 +15,8 @@ import com.blackjack.entity.game.Game;
 import com.blackjack.entity.game.GameStorage;
 import com.blackjack.entity.game.Game_Status;
 import com.blackjack.entity.game.HandCardsStorage;
+import com.blackjack.entity.player.GameRole;
 import com.blackjack.entity.player.Player;
-import com.blackjack.entity.player.Role;
 import com.blackjack.entity.room.Room;
 import com.blackjack.entity.room.RoomStorage;
 import com.blackjack.entity.room.Room_Status;
@@ -38,7 +39,7 @@ public class GameService {
 		room.addPlayer(player);
 		room.setRoomId("" + new Random().nextInt(1000));
 		room.setStatus(Room_Status.JOINABLE);
-		player.setRole(Role.MASTER);
+		player.setGameRole(GameRole.MASTER);
 		RoomStorage.getInstance().setRoom(room);
 		return room;
 
@@ -59,7 +60,7 @@ public class GameService {
 		if (room.getPlayers().size() == 4) {
 			room.setStatus(Room_Status.FULL);
 		}
-		player.setRole(Role.JOINER);
+		player.setGameRole(GameRole.JOINER);
 		room.addPlayer(player);
 		RoomStorage.getInstance().setRoom(room);
 
@@ -68,11 +69,11 @@ public class GameService {
 
 	public Game startGame(String roomId) throws GameException {
 		Game game = new Game();
-		game.setGameId("Game" + new Random().nextLong());
+		game.setGameId(UUID.randomUUID()+"");
 		game.setRoomId(roomId);
 		ArrayList<Player> players = RoomStorage.getInstance().getRooms().get(roomId).getPlayers();
 
-		// Create init 2 card to start game
+		// Create init 2 cards to start game
 		players.forEach(p -> {
 			try {
 				gameProcess.startOfCards(p);
@@ -81,6 +82,7 @@ public class GameService {
 				e.printStackTrace();
 			}
 		});
+		game.setPlayersCards( HandCardsStorage.getInstance().getCardStorage());
 		game.setStatus(Game_Status.IN_PROCESS);
 		GameStorage.getInstance().setGame(game);
 		return game;
@@ -105,7 +107,7 @@ public class GameService {
 		ArrayList<Player> players = RoomStorage.getInstance().getRooms().get(gamePlay.getRoomId()).getPlayers();
 		Player master = getMaster(players);
 		players.forEach(p -> {
-			if (!p.getRole().equals(Role.MASTER)) {
+			if (!p.getGameRole().equals(GameRole.MASTER)) {
 				GameResult competeResult;
 				try {
 					competeResult = gameProcess.compete(master, p, gamePlay.getFareOfAmount());
@@ -127,7 +129,7 @@ public class GameService {
 		Iterator<Player> it = players.iterator();
 		while (it.hasNext()) {
 			Player player = (Player) it.next();
-			if (player.getRole().equals(Role.MASTER)) {
+			if (player.getGameRole().equals(GameRole.MASTER)) {
 				mst = player;
 				break;
 			}

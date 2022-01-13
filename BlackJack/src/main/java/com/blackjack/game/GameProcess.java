@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 import com.blackjack.entity.card.Card;
 import com.blackjack.entity.card.CardStorage;
 import com.blackjack.entity.game.HandCardsStorage;
+import com.blackjack.entity.player.GameRole;
 import com.blackjack.entity.player.Player;
-import com.blackjack.entity.player.Role;
 import com.blackjack.exception.GameException;
 import com.blackjack.exception.TransactionException;
 import com.blackjack.service.Transaction;
@@ -57,7 +57,7 @@ public class GameProcess {
 			result = BJResult.FIVE_DRAGON;
 		} else {
 			int points = GameRules.totalPoint(cards);
-			if (player.getRole() == Role.MASTER) {
+			if (player.getGameRole() == GameRole.MASTER) {
 				result = BJResult.MASTER_OF_FREE_HAND;
 				result.setValue(points);
 			} else {
